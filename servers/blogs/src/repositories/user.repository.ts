@@ -17,4 +17,8 @@ export class UserRepository {
   createUser(createInput: CreateUserDto): Promise<User> {
     return this.userRepository.save(createInput);
   }
+
+  getUserById(email: string): Promise<User> {
+    return this.userRepository.findOne({ where: { email } });
+  }
 }

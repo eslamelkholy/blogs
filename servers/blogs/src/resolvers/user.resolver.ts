@@ -22,4 +22,12 @@ export class UserResolver {
   ): Promise<User> {
     return this.userService.createUser(createUserInput);
   }
+
+  @Query(() => User, { name: 'getUserByEmail' })
+  @UseGuards(UserGuard)
+  getUserByEmail(
+    @Args('email', { type: () => String }) email: string,
+  ): Promise<User> {
+    return this.userService.getUserByEmail(email);
+  }
 }

@@ -17,8 +17,8 @@ export class UserService {
     return new User();
   }
 
-  getUser(): User {
-    return new User();
+  async getUserByEmail(email: string): Promise<User> {
+    return this.userRepository.getUserById(email);
   }
 
   async getUsers(): Promise<User[]> {
