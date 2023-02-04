@@ -3,11 +3,11 @@
 # ------------------------------------------------------
 
 type User {
-  id: Int!
-  name: String
-  email: String
+  id: Float!
+  name: String!
+  email: String!
 }
 
 type Query {
-  users: [User!]!
+  FindAllUsers: [User!]!
 }
