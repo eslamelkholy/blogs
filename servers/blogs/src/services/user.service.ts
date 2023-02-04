@@ -1,6 +1,6 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
-import { CustomError } from 'src/errors/custom.error';
-import { ErrorMsg } from 'src/errors/error.message';
+import { CustomError } from '../errors/custom.error';
+import { ErrorMsg } from '../errors/error.message';
 import { CreateUserDto } from '../dtos/user.dto';
 import { User } from '../entities/user.entity';
 import { UserRepository } from '../repositories/user.repository';

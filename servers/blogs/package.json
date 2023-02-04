@@ -67,15 +67,18 @@
       "json",
       "ts"
     ],
-    "rootDir": "src",
-    "testRegex": ".*\\.spec\\.ts$",
+    "rootDir": ".",
+    "testRegex": ".spec.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     },
     "collectCoverageFrom": [
-      "**/*.(t|j)s"
+      "src/helpers/*.ts",
+      "src/v2/consumers/*.ts",
+      "src/v2/services/*.ts"
     ],
-    "coverageDirectory": "../coverage",
+    "coveragePathIgnorePatterns": [],
+    "coverageDirectory": "coverage",
     "testEnvironment": "node"
   }
 }
