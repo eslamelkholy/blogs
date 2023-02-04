@@ -7,6 +7,7 @@ import { UserRepository } from '../repositories/user.repository';
 export class UserService {
   constructor(private userRepository: UserRepository) {}
   async createUser(createUserInput: CreateUserDto): Promise<User> {
+    // TODO: Validate Enum input and mail
     const newUser = await this.userRepository.createUser(createUserInput);
 
     return newUser;

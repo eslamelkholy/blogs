@@ -7,4 +7,7 @@ export class CreateUserDto {
 
   @Field()
   email: string;
+
+  @Field()
+  role: string;
 }

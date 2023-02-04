@@ -6,6 +6,7 @@ type User {
   id: String!
   name: String!
   email: String!
+  role: String!
 }
 
 type Query {
@@ -19,4 +20,5 @@ type Mutation {
 input CreateUserDto {
   name: String!
   email: String!
+  role: String!
 }
