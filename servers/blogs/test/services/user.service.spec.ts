@@ -3,6 +3,7 @@ import { mockUserRepository } from '../__mock__/repository/mockUserRepository';
 import { UserRepository } from '../../src/repositories/user.repository';
 import { UserService } from '../../src/services/user.service';
 import { CustomError } from '../../src/errors/custom.error';
+import { usersList } from '../__mock__/resource/users';
 
 describe('Service/UserService', () => {
   let userService: UserService;
@@ -33,6 +34,15 @@ describe('Service/UserService', () => {
       expect(userService.getUserByEmail('email')).rejects.toThrowError(
         CustomError,
       );
+    });
+
+    it('Must Delete User if User Exists', async () => {
+      jest
+        .spyOn(userRepository, 'getUserByEmail')
+        .mockImplementation(() => Promise.resolve(usersList[0]));
+      await userService.deleteUser('user');
+
+      expect(userRepository.deleteUser).toBeCalled();
     });
   });
 });

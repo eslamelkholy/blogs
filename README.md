@@ -1,6 +1,14 @@
 # Blogs Application
+
 This application to Handle Blogs to Different Types of Users
 
+### Key Features
+
+- Service and Repository Layer
+- Nestjs Framework and Graphql
+- Abstract Validation Layers
+- Error Handling Feature
+- Unit Test Using Jest
 
 ### ERD Diagram
 

@@ -9,6 +9,14 @@ import { UserRepository } from '../repositories/user.repository';
 export class UserService {
   constructor(private userRepository: UserRepository) {}
   async createUser(createUserInput: CreateUserDto): Promise<User> {
+    const user = await this.userRepository.getUserByEmail(
+      createUserInput.email,
+    );
+
+    if (user) {
+      throw new CustomError(ErrorMsg.BAD_REQUEST, HttpStatus.BAD_REQUEST);
+    }
+
     const newUser = await this.userRepository.createUser(createUserInput);
     return newUser;
   }
