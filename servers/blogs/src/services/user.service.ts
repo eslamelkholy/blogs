@@ -1,4 +1,3 @@
-import { BadRequestError } from '@common-kitchen/common';
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from '../dtos/user.dto';
 import { User } from '../entities/user.entity';
@@ -8,13 +7,8 @@ import { UserRepository } from '../repositories/user.repository';
 export class UserService {
   constructor(private userRepository: UserRepository) {}
   async createUser(createUserInput: CreateUserDto): Promise<User> {
-    // TODO: Validate Enum input and mail
     const newUser = await this.userRepository.createUser(createUserInput);
     return newUser;
-  }
-
-  public updateUser(): User {
-    return new User();
   }
 
   async getUserByEmail(email: string): Promise<User> {
@@ -27,7 +21,9 @@ export class UserService {
     return users;
   }
 
-  public deleteUser(): User {
-    return new User();
+  async deleteUser(email: string): Promise<User> {
+    const user = await this.userRepository.deleteUser(email);
+
+    return user;
   }
 }

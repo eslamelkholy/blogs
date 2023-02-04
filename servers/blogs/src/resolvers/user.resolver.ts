@@ -30,4 +30,12 @@ export class UserResolver {
   ): Promise<User> {
     return this.userService.getUserByEmail(email);
   }
+
+  @Mutation(() => User)
+  @UseGuards(UseGuards)
+  deleteUser(
+    @Args('email', { type: () => String }) email: string,
+  ): Promise<User> {
+    return this.userService.deleteUser(email);
+  }
 }
