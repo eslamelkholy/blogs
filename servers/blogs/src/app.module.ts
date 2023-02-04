@@ -15,6 +15,7 @@ import { Post } from './entities/post.entity';
 import { PostService } from './services/post.service';
 import { PostResolver } from './resolvers/post.resolver';
 import { PostRepository } from './repositories/post.repository';
+import { UserToPost } from './entities/user.post.entity';
 
 @Module({
   imports: [
@@ -56,6 +57,7 @@ import { PostRepository } from './repositories/post.repository';
     PostService,
     PostResolver,
     PostRepository,
+    UserToPost,
   ],
 })
 export class AppModule {}

@@ -1,6 +1,4 @@
-import { HttpStatus, Injectable } from '@nestjs/common';
-import { CustomError } from '../errors/custom.error';
-import { ErrorMsg } from '../errors/error.message';
+import { Injectable } from '@nestjs/common';
 import { Post } from '../entities/post.entity';
 import { CreatePostDto } from '../dtos/post.dto';
 import { PostRepository } from '../repositories/post.repository';

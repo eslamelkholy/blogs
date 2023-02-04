@@ -1,6 +1,13 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  OneToMany,
+} from 'typeorm';
 import { User } from './user.entity';
+import { UserToPost } from './user.post.entity';
 
 @ObjectType()
 @Entity()
@@ -28,4 +35,7 @@ export class Post {
   @ManyToOne(() => User, (user) => user.posts)
   @Field((type) => User)
   user: User;
+
+  @OneToMany(() => UserToPost, (userToPost) => userToPost.post)
+  public userToPost: UserToPost[];
 }

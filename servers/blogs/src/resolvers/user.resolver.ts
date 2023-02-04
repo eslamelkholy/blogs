@@ -15,20 +15,20 @@ export class UserResolver {
     return this.userService.getUsers();
   }
 
-  @Mutation(() => User)
-  @UseGuards(UserGuard)
-  createUser(
-    @Args('createUserInput') createUserInput: CreateUserDto,
-  ): Promise<User> {
-    return this.userService.createUser(createUserInput);
-  }
-
   @Query(() => User, { name: 'getUserByEmail' })
   @UseGuards(UserGuard)
   getUserByEmail(
     @Args('email', { type: () => String }) email: string,
   ): Promise<User> {
     return this.userService.getUserByEmail(email);
+  }
+
+  @Mutation(() => User)
+  @UseGuards(UserGuard)
+  createUser(
+    @Args('createUserInput') createUserInput: CreateUserDto,
+  ): Promise<User> {
+    return this.userService.createUser(createUserInput);
   }
 
   @Mutation(() => User)
