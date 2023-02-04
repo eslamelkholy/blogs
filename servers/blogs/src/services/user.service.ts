@@ -1,4 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
+import { CustomError } from 'src/errors/custom.error';
+import { ErrorMsg } from 'src/errors/error.message';
 import { CreateUserDto } from '../dtos/user.dto';
 import { User } from '../entities/user.entity';
 import { UserRepository } from '../repositories/user.repository';
@@ -12,7 +14,7 @@ export class UserService {
   }
 
   async getUserByEmail(email: string): Promise<User> {
-    return this.userRepository.getUserById(email);
+    return this.userRepository.getUserByEmail(email);
   }
 
   async getUsers(): Promise<User[]> {
@@ -22,7 +24,13 @@ export class UserService {
   }
 
   async deleteUser(email: string): Promise<User> {
-    const user = await this.userRepository.deleteUser(email);
+    const user = await this.userRepository.getUserByEmail(email);
+
+    if (!user) {
+      throw new CustomError(ErrorMsg.NOT_FOUND, HttpStatus.NOT_FOUND);
+    }
+
+    await this.userRepository.deleteUser(email);
 
     return user;
   }

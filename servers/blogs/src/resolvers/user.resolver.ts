@@ -32,7 +32,7 @@ export class UserResolver {
   }
 
   @Mutation(() => User)
-  @UseGuards(UseGuards)
+  @UseGuards(UserGuard)
   deleteUser(
     @Args('email', { type: () => String }) email: string,
   ): Promise<User> {
