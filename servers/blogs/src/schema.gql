@@ -3,11 +3,20 @@
 # ------------------------------------------------------
 
 type User {
-  id: Float!
+  id: String!
   name: String!
   email: String!
 }
 
 type Query {
   FindAllUsers: [User!]!
+}
+
+type Mutation {
+  createUser(createUserInput: CreateUserDto!): User!
+}
+
+input CreateUserDto {
+  name: String!
+  email: String!
 }
