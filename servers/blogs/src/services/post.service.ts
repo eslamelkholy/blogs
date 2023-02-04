@@ -13,11 +13,7 @@ export class PostService {
     private userService: UserService,
   ) {}
   async createPost(createPostInput: CreatePostDto): Promise<Post> {
-    const user = await this.userService.getUserById(createPostInput.userId);
-
-    if (!user) {
-      throw new CustomError(ErrorMsg.NOT_FOUND, HttpStatus.NOT_FOUND);
-    }
+    await this.userService.getUserById(createPostInput.userId);
 
     const newPost = await this.postRepository.createPost(createPostInput);
     return newPost;
