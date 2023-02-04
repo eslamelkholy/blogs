@@ -10,7 +10,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { UserRepository } from './repositories/user.repository';
-import { GraphQLError, GraphQLFormattedError } from 'graphql';
+import { GraphQLFormattedError } from 'graphql';
 
 @Module({
   imports: [
@@ -20,7 +20,9 @@ import { GraphQLError, GraphQLFormattedError } from 'graphql';
       debug: process.env.NODE_ENV === 'development',
       playground: process.env.NODE_ENV === 'development',
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-      formatError: (error: GraphQLError) => {
+      formatError: (error: any) => {
+        if (error.extensions.code === 'BAD_USER_INPUT') return error;
+
         delete error.extensions.exception.stacktrace;
         const graphQLFormattedError: GraphQLFormattedError = {
           message: error.message,

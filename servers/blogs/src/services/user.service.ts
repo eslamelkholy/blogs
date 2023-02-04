@@ -14,7 +14,12 @@ export class UserService {
   }
 
   async getUserByEmail(email: string): Promise<User> {
-    return this.userRepository.getUserByEmail(email);
+    const user = await this.userRepository.getUserByEmail(email);
+
+    if (!user) {
+      throw new CustomError(ErrorMsg.NOT_FOUND, HttpStatus.NOT_FOUND);
+    }
+    return user;
   }
 
   async getUsers(): Promise<User[]> {
