@@ -1,4 +1,4 @@
-import { BadRequestError, NotAuthorizedError } from '@common-kitchen/common';
+import { NotAuthorizedError } from '@common-kitchen/common';
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { UserRole } from '../entities/user.entity';
@@ -11,8 +11,9 @@ export class UserGuard implements CanActivate {
 
     const { role } = req.body.variables;
 
-    if (role === undefined || role !== UserRole.ADMIN)
+    if (role === undefined || role !== UserRole.ADMIN) {
       throw new NotAuthorizedError();
+    }
 
     return true;
   }

@@ -1,3 +1,4 @@
+import { BadRequestError } from '@common-kitchen/common';
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from '../dtos/user.dto';
 import { User } from '../entities/user.entity';
@@ -9,7 +10,6 @@ export class UserService {
   async createUser(createUserInput: CreateUserDto): Promise<User> {
     // TODO: Validate Enum input and mail
     const newUser = await this.userRepository.createUser(createUserInput);
-
     return newUser;
   }
 
