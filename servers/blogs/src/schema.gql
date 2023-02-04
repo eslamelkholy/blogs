@@ -2,11 +2,21 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Post {
+  id: String!
+  title: String!
+  subTitle: String!
+  text: String!
+  userId: String!
+  user: User!
+}
+
 type User {
   id: String!
   name: String!
   email: String!
   role: String!
+  posts: [Post!]
 }
 
 type Query {
@@ -17,10 +27,18 @@ type Query {
 type Mutation {
   createUser(createUserInput: CreateUserDto!): User!
   deleteUser(email: String!): User!
+  createPost(createPostInput: CreatePostDto!): Post!
 }
 
 input CreateUserDto {
   name: String!
   email: String!
   role: String!
+}
+
+input CreatePostDto {
+  title: String!
+  subTitle: String!
+  text: String!
+  userId: String!
 }

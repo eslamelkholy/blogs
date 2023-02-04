@@ -11,6 +11,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { UserRepository } from './repositories/user.repository';
 import { GraphQLFormattedError } from 'graphql';
+import { Post } from './entities/post.entity';
+import { PostService } from './services/post.service';
+import { PostResolver } from './resolvers/post.resolver';
+import { PostRepository } from './repositories/post.repository';
 
 @Module({
   imports: [
@@ -41,9 +45,17 @@ import { GraphQLFormattedError } from 'graphql';
       entities: ['dist/entities/*.entity{.ts,.js}'],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([User]),
+    TypeOrmModule.forFeature([User, Post]),
   ],
   controllers: [AppController],
-  providers: [AppService, UserService, UserResolver, UserRepository],
+  providers: [
+    AppService,
+    UserService,
+    UserResolver,
+    UserRepository,
+    PostService,
+    PostResolver,
+    PostRepository,
+  ],
 })
 export class AppModule {}

@@ -47,4 +47,13 @@ export class UserService {
 
     return user;
   }
+
+  async getUserById(id: string): Promise<User> {
+    const user = await this.userRepository.getUserById(id);
+
+    if (!user) {
+      throw new CustomError(ErrorMsg.NOT_FOUND, HttpStatus.NOT_FOUND);
+    }
+    return user;
+  }
 }
