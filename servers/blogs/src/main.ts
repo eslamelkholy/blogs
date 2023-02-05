@@ -1,3 +1,4 @@
+import { requestLogger } from '@common-kitchen/common';
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';

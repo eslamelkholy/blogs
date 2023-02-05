@@ -28,10 +28,24 @@ type User {
   posts: [Post!]
 }
 
+type PageMetaDto {
+  page: Float!
+  take: Float!
+  itemCount: Float!
+  pageCount: Float!
+  hasPreviousPage: Boolean!
+  hasNextPage: Boolean!
+}
+
+type PostResponse {
+  entities: [Post!]
+  pagination: PageMetaDto!
+}
+
 type Query {
   FindAllUsers: [User!]!
   getUserByEmail(email: String!): User!
-  GetUserPosts(pageOptionDto: PageOptionsDto!): [Post!]!
+  GetUserPosts(pageOptionDto: PageOptionsDto!): PostResponse!
   GetProfilePosts(pageOptionDto: PageOptionsDto!): [Post!]!
 }
 

@@ -3,7 +3,7 @@ import { Resolver, Mutation, Args, Query, Context } from '@nestjs/graphql';
 import { UserGuard } from '../guards/admin.guard';
 import { Post } from '../entities/post.entity';
 import { PostService } from '../services/post.service';
-import { CreatePostDto } from '../dtos/post.dto';
+import { CreatePostDto, PostResponse } from '../dtos/post.dto';
 import { PageOptionsDto } from '../dtos/pagination/page.option.dto';
 
 @Resolver(() => Post)
@@ -18,11 +18,11 @@ export class PostResolver {
     return this.postService.createPost(createPostInput);
   }
 
-  @Query(() => [Post], { name: 'GetUserPosts' })
+  @Query(() => PostResponse, { name: 'GetUserPosts' })
   getPosts(
     @Args('pageOptionDto') pageOptionDto: PageOptionsDto,
     @Context('req') req,
-  ): Promise<Post[]> {
+  ): Promise<PostResponse> {
     return this.postService.getPosts(pageOptionDto, req.body.variables.id);
   }
 
@@ -37,7 +37,5 @@ export class PostResolver {
     );
   }
 
-  // TODO: Profile Posts
   // TODO: Logger
-  // TODO: Jobs
 }

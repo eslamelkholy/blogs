@@ -1,24 +1,32 @@
+import { Field, ObjectType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 import { PageMetaDtoParameters } from './page.meta.interface';
 
+@ObjectType()
 export class PageMetaDto {
   @ApiProperty()
-  readonly page: number;
+  @Field()
+  page: number;
 
   @ApiProperty()
-  readonly take: number;
+  @Field()
+  take: number;
 
   @ApiProperty()
-  readonly itemCount: number;
+  @Field()
+  itemCount: number;
 
   @ApiProperty()
-  readonly pageCount: number;
+  @Field()
+  pageCount: number;
 
   @ApiProperty()
-  readonly hasPreviousPage: boolean;
+  @Field()
+  hasPreviousPage: boolean;
 
   @ApiProperty()
-  readonly hasNextPage: boolean;
+  @Field()
+  hasNextPage: boolean;
 
   constructor({ pageOptionsDto, itemCount }: PageMetaDtoParameters) {
     this.page = pageOptionsDto.page;

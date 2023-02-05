@@ -1,7 +1,8 @@
-import { Field, InputType } from '@nestjs/graphql';
+import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import { IsEnum, IsString, IsUUID } from 'class-validator';
-import { SegmentType } from 'src/entities/post.entity';
-import { ApiProperty } from '@nestjs/swagger';
+import { Post, SegmentType } from 'src/entities/post.entity';
+import { PaginatedResultSet } from './pagination/pagination.type';
+import { PageMetaDto } from './pagination/page.meta.dto';
 
 @InputType()
 export class CreatePostDto {
@@ -30,19 +31,17 @@ export class CreatePostDto {
   userIds?: string[];
 }
 
-export class PostDto {
-  @ApiProperty()
-  public title: string;
+@ObjectType()
+export class PostResponse implements PaginatedResultSet<Post> {
+  @Field(() => [Post], { nullable: true })
+  entities?: Post[];
 
-  @ApiProperty()
-  public subTitle: string;
+  @Field(() => PageMetaDto)
+  pagination: PageMetaDto;
 
-  @ApiProperty()
-  public text: string;
+  constructor(entities: Post[], pagination: PageMetaDto) {
+    this.entities = entities;
 
-  @ApiProperty()
-  public userId: string;
-
-  @ApiProperty()
-  public segmentType: string;
+    this.pagination = pagination;
+  }
 }

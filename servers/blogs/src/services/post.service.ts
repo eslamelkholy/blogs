@@ -1,6 +1,6 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { Post, SegmentType } from '../entities/post.entity';
-import { CreatePostDto } from '../dtos/post.dto';
+import { CreatePostDto, PostResponse } from '../dtos/post.dto';
 import { PostRepository } from '../repositories/post.repository';
 import { UserService } from './user.service';
 import { UserPostService } from './user.post.service';
@@ -30,7 +30,7 @@ export class PostService {
   async getPosts(
     pageOptionDto: PageOptionsDto,
     userId: string,
-  ): Promise<Post[]> {
+  ): Promise<PostResponse> {
     if (!userId) {
       throw new CustomError(ErrorMsg.NOT_FOUND, HttpStatus.NOT_FOUND);
     }

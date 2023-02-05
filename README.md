@@ -9,6 +9,7 @@ This application to Handle Blogs to Different Types of Users
 - Abstract Validation Layers
 - Error Handling Feature
 - Unit Test Using Jest
+- Generic Pagination Service
 
 ### ERD Diagram
 

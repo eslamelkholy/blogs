@@ -2,9 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Post } from '../entities/post.entity';
-import { CreatePostDto } from '../dtos/post.dto';
+import { CreatePostDto, PostResponse } from '../dtos/post.dto';
 import { PageOptionsDto } from '../dtos/pagination/page.option.dto';
-import { PageDto } from '../dtos/pagination/page.dto';
 import { PageMetaDto } from '../dtos/pagination/page.meta.dto';
 import { User } from '../entities/user.entity';
 import { UserToPost } from '../entities/user.post.entity';
@@ -19,7 +18,10 @@ export class PostRepository {
     return this.postRepository.save(createInput);
   }
 
-  async getPosts(pageOptionDto: PageOptionsDto, user: User): Promise<Post[]> {
+  async getPosts(
+    pageOptionDto: PageOptionsDto,
+    user: User,
+  ): Promise<PostResponse> {
     const queryBuilder = this.postRepository.createQueryBuilder('post');
 
     queryBuilder
@@ -38,9 +40,15 @@ export class PostRepository {
       .skip(pageOptionDto.skip)
       .take(pageOptionDto.take);
 
+    const itemCount = await queryBuilder.getCount();
     const { entities } = await queryBuilder.getRawAndEntities();
 
-    return entities;
+    const pageMetaDto = new PageMetaDto({
+      itemCount,
+      pageOptionsDto: pageOptionDto,
+    });
+
+    return new PostResponse(entities, pageMetaDto);
   }
 
   async getProfilePosts(
@@ -59,23 +67,4 @@ export class PostRepository {
 
     return entities;
   }
-
-  // async getPostsV2(pageOptionDto: PageOptionsDto): Promise<PageDto<Post>> {
-  //   const queryBuilder = this.postRepository.createQueryBuilder('post');
-
-  //   queryBuilder
-  //     .orderBy('post.created_at', pageOptionDto.order)
-  //     .skip(pageOptionDto.skip)
-  //     .take(pageOptionDto.take);
-
-  //   const itemCount = await queryBuilder.getCount();
-  //   const { entities } = await queryBuilder.getRawAndEntities();
-
-  //   const pageMetaDto = new PageMetaDto({
-  //     itemCount,
-  //     pageOptionsDto: pageOptionDto,
-  //   });
-
-  //   return new PageDto(entities, pageMetaDto);
-  // }
 }
