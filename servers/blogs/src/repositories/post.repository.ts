@@ -54,7 +54,7 @@ export class PostRepository {
   async getProfilePosts(
     pageOptionDto: PageOptionsDto,
     user: User,
-  ): Promise<Post[]> {
+  ): Promise<PostResponse> {
     const queryBuilder = this.postRepository.createQueryBuilder('post');
 
     queryBuilder
@@ -63,8 +63,14 @@ export class PostRepository {
       .skip(pageOptionDto.skip)
       .take(pageOptionDto.take);
 
+    const itemCount = await queryBuilder.getCount();
     const { entities } = await queryBuilder.getRawAndEntities();
 
-    return entities;
+    const pageMetaDto = new PageMetaDto({
+      itemCount,
+      pageOptionsDto: pageOptionDto,
+    });
+
+    return new PostResponse(entities, pageMetaDto);
   }
 }

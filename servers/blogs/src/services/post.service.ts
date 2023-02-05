@@ -42,7 +42,7 @@ export class PostService {
   async getProfilePosts(
     pageOptionDto: PageOptionsDto,
     userId: string,
-  ): Promise<Post[]> {
+  ): Promise<PostResponse> {
     if (!userId) {
       throw new CustomError(ErrorMsg.NOT_FOUND, HttpStatus.NOT_FOUND);
     }

@@ -26,11 +26,11 @@ export class PostResolver {
     return this.postService.getPosts(pageOptionDto, req.body.variables.id);
   }
 
-  @Query(() => [Post], { name: 'GetProfilePosts' })
+  @Query(() => PostResponse, { name: 'GetProfilePosts' })
   getProfilePosts(
     @Args('pageOptionDto') pageOptionDto: PageOptionsDto,
     @Context('req') req,
-  ): Promise<Post[]> {
+  ): Promise<PostResponse> {
     return this.postService.getProfilePosts(
       pageOptionDto,
       req.body.variables.id,
