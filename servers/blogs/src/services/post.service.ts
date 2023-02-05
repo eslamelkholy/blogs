@@ -50,4 +50,8 @@ export class PostService {
 
     return await this.postRepository.getProfilePosts(pageOptionDto, user);
   }
+
+  async publishPosts(): Promise<void> {
+    await this.postRepository.publishPosts();
+  }
 }

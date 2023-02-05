@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, SelectQueryBuilder } from 'typeorm';
-import { Post } from '../entities/post.entity';
+import { Post, PostStatus } from '../entities/post.entity';
 import { CreatePostDto, PostResponse } from '../dtos/post.dto';
 import { PageOptionsDto } from '../dtos/pagination/page.option.dto';
 import { PageMetaDto } from '../dtos/pagination/page.meta.dto';
@@ -58,6 +58,14 @@ export class PostRepository {
     return new PostResponse(entities, pageMetaDto);
   }
 
+  async publishPosts(): Promise<void> {
+    const queryBuilder = this.postRepository.createQueryBuilder('post');
+    queryBuilder
+      .update(Post)
+      .set({ postStatus: PostStatus.PUBLISHED })
+      .execute();
+  }
+
   timelineQuery(
     user: User,
     pageOptionDto: PageOptionsDto,
@@ -65,7 +73,10 @@ export class PostRepository {
     const queryBuilder = this.postRepository.createQueryBuilder('post');
 
     queryBuilder
-      .where('post.segmentType = :segmentType', { segmentType: user.role })
+      .where(
+        `post.segmentType = :segmentType AND post.postStatus = 'Published'`,
+        { segmentType: user.role },
+      )
       .orWhere((qb) => {
         const subQuery = qb
           .subQuery()
@@ -73,7 +84,7 @@ export class PostRepository {
           .from(UserToPost, 'user_to_post')
           .where('user_to_post.userId = :userId')
           .getQuery();
-        return 'post.id IN ' + subQuery;
+        return 'post.id IN ' + subQuery + ` AND post.postStatus = 'Published'`;
       })
       .setParameter('userId', user.id)
       .orderBy('post.created_at', pageOptionDto.order)

@@ -1,6 +1,6 @@
 import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import { IsEnum, IsString, IsUUID } from 'class-validator';
-import { Post, SegmentType } from 'src/entities/post.entity';
+import { Post, SegmentType } from '../entities/post.entity';
 import { PaginatedResultSet } from './pagination/pagination.type';
 import { PageMetaDto } from './pagination/page.meta.dto';
 

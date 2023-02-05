@@ -1,6 +1,7 @@
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
+import { ScheduleModule } from '@nestjs/schedule';
 import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './services/app.service';
@@ -18,9 +19,11 @@ import { PostRepository } from './repositories/post.repository';
 import { UserToPost } from './entities/user.post.entity';
 import { UserPostService } from './services/user.post.service';
 import { UserPostRepository } from './repositories/user.post.repository';
+import { PostJobService } from './jobs/post.job';
 
 @Module({
   imports: [
+    ScheduleModule.forRoot(),
     ConfigModule.forRoot({}),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
@@ -62,6 +65,7 @@ import { UserPostRepository } from './repositories/user.post.repository';
     UserToPost,
     UserPostService,
     UserPostRepository,
+    PostJobService,
   ],
 })
 export class AppModule {}
