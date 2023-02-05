@@ -43,6 +43,23 @@ export class PostRepository {
     return entities;
   }
 
+  async getProfilePosts(
+    pageOptionDto: PageOptionsDto,
+    user: User,
+  ): Promise<Post[]> {
+    const queryBuilder = this.postRepository.createQueryBuilder('post');
+
+    queryBuilder
+      .where('post.userId = :userId', { userId: user.id })
+      .orderBy('post.created_at', pageOptionDto.order)
+      .skip(pageOptionDto.skip)
+      .take(pageOptionDto.take);
+
+    const { entities } = await queryBuilder.getRawAndEntities();
+
+    return entities;
+  }
+
   // async getPostsV2(pageOptionDto: PageOptionsDto): Promise<PageDto<Post>> {
   //   const queryBuilder = this.postRepository.createQueryBuilder('post');
 

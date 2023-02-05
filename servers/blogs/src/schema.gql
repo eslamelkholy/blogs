@@ -32,6 +32,7 @@ type Query {
   FindAllUsers: [User!]!
   getUserByEmail(email: String!): User!
   GetUserPosts(pageOptionDto: PageOptionsDto!): [Post!]!
+  GetProfilePosts(pageOptionDto: PageOptionsDto!): [Post!]!
 }
 
 input PageOptionsDto {

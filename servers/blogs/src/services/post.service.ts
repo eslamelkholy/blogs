@@ -1,10 +1,12 @@
-import { Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import { Post, SegmentType } from '../entities/post.entity';
 import { CreatePostDto } from '../dtos/post.dto';
 import { PostRepository } from '../repositories/post.repository';
 import { UserService } from './user.service';
 import { UserPostService } from './user.post.service';
 import { PageOptionsDto } from '../dtos/pagination/page.option.dto';
+import { CustomError } from '../errors/custom.error';
+import { ErrorMsg } from '../errors/error.message';
 
 @Injectable()
 export class PostService {
@@ -29,8 +31,23 @@ export class PostService {
     pageOptionDto: PageOptionsDto,
     userId: string,
   ): Promise<Post[]> {
+    if (!userId) {
+      throw new CustomError(ErrorMsg.NOT_FOUND, HttpStatus.NOT_FOUND);
+    }
     const user = await this.userService.getUserById(userId);
 
     return await this.postRepository.getPosts(pageOptionDto, user);
+  }
+
+  async getProfilePosts(
+    pageOptionDto: PageOptionsDto,
+    userId: string,
+  ): Promise<Post[]> {
+    if (!userId) {
+      throw new CustomError(ErrorMsg.NOT_FOUND, HttpStatus.NOT_FOUND);
+    }
+    const user = await this.userService.getUserById(userId);
+
+    return await this.postRepository.getProfilePosts(pageOptionDto, user);
   }
 }

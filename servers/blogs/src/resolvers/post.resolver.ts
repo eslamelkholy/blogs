@@ -25,4 +25,19 @@ export class PostResolver {
   ): Promise<Post[]> {
     return this.postService.getPosts(pageOptionDto, req.body.variables.id);
   }
+
+  @Query(() => [Post], { name: 'GetProfilePosts' })
+  getProfilePosts(
+    @Args('pageOptionDto') pageOptionDto: PageOptionsDto,
+    @Context('req') req,
+  ): Promise<Post[]> {
+    return this.postService.getProfilePosts(
+      pageOptionDto,
+      req.body.variables.id,
+    );
+  }
+
+  // TODO: Profile Posts
+  // TODO: Logger
+  // TODO: Jobs
 }
