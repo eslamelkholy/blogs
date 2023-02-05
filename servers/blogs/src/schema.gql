@@ -2,6 +2,12 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type UserToPost {
+  id: String!
+  postId: String!
+  userId: String!
+}
+
 type Post {
   id: String!
   title: String!
@@ -28,6 +34,7 @@ type Mutation {
   createUser(createUserInput: CreateUserDto!): User!
   deleteUser(email: String!): User!
   createPost(createPostInput: CreatePostDto!): Post!
+  createUserPosts(createUserPostInput: CreateUserPostDto!): [UserToPost!]!
 }
 
 input CreateUserDto {
@@ -41,4 +48,9 @@ input CreatePostDto {
   subTitle: String!
   text: String!
   userId: String!
+}
+
+input CreateUserPostDto {
+  userIds: [String!]
+  PostId: String!
 }

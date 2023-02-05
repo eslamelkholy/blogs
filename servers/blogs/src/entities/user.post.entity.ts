@@ -1,9 +1,10 @@
-import { Field } from '@nestjs/graphql';
+import { Field, ObjectType } from '@nestjs/graphql';
 import { Entity, Column, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Post } from './post.entity';
 import { User } from './user.entity';
 
 @Entity()
+@ObjectType()
 export class UserToPost {
   @Field()
   @PrimaryGeneratedColumn('uuid')
