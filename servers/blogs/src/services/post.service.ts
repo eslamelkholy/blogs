@@ -25,7 +25,12 @@ export class PostService {
     return newPost;
   }
 
-  async getPosts(pageOptionDto: PageOptionsDto): Promise<Post[]> {
-    return this.postRepository.getPosts(pageOptionDto);
+  async getPosts(
+    pageOptionDto: PageOptionsDto,
+    userId: string,
+  ): Promise<Post[]> {
+    const user = await this.userService.getUserById(userId);
+
+    return await this.postRepository.getPosts(pageOptionDto, user);
   }
 }

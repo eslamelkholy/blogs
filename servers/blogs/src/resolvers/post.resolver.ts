@@ -1,5 +1,5 @@
 import { UseGuards } from '@nestjs/common';
-import { Resolver, Mutation, Args, Query } from '@nestjs/graphql';
+import { Resolver, Mutation, Args, Query, Context } from '@nestjs/graphql';
 import { UserGuard } from '../guards/admin.guard';
 import { Post } from '../entities/post.entity';
 import { PostService } from '../services/post.service';
@@ -21,7 +21,8 @@ export class PostResolver {
   @Query(() => [Post], { name: 'GetUserPosts' })
   getPosts(
     @Args('pageOptionDto') pageOptionDto: PageOptionsDto,
+    @Context('req') req,
   ): Promise<Post[]> {
-    return this.postService.getPosts(pageOptionDto);
+    return this.postService.getPosts(pageOptionDto, req.body.variables.id);
   }
 }
