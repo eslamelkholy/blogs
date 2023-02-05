@@ -31,6 +31,13 @@ type User {
 type Query {
   FindAllUsers: [User!]!
   getUserByEmail(email: String!): User!
+  GetUserPosts(pageOptionDto: PageOptionsDto!): [Post!]!
+}
+
+input PageOptionsDto {
+  order: String! = "ASC"
+  page: Float! = 1
+  take: Float! = 10
 }
 
 type Mutation {

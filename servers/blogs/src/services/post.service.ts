@@ -4,6 +4,7 @@ import { CreatePostDto } from '../dtos/post.dto';
 import { PostRepository } from '../repositories/post.repository';
 import { UserService } from './user.service';
 import { UserPostService } from './user.post.service';
+import { PageOptionsDto } from '../dtos/pagination/page.option.dto';
 
 @Injectable()
 export class PostService {
@@ -22,5 +23,9 @@ export class PostService {
     }
 
     return newPost;
+  }
+
+  async getPosts(pageOptionDto: PageOptionsDto): Promise<Post[]> {
+    return this.postRepository.getPosts(pageOptionDto);
   }
 }

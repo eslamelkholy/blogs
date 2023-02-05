@@ -1,6 +1,7 @@
 import { Field, InputType } from '@nestjs/graphql';
 import { IsEnum, IsString, IsUUID } from 'class-validator';
 import { SegmentType } from 'src/entities/post.entity';
+import { ApiProperty } from '@nestjs/swagger';
 
 @InputType()
 export class CreatePostDto {
@@ -27,4 +28,21 @@ export class CreatePostDto {
   @IsUUID(undefined, { each: true })
   @Field((type) => [String], { nullable: true })
   userIds?: string[];
+}
+
+export class PostDto {
+  @ApiProperty()
+  public title: string;
+
+  @ApiProperty()
+  public subTitle: string;
+
+  @ApiProperty()
+  public text: string;
+
+  @ApiProperty()
+  public userId: string;
+
+  @ApiProperty()
+  public segmentType: string;
 }
