@@ -18,4 +18,5 @@ This application to Handle Blogs to Different Types of Users
 ### Follow Up
 
 - Having Authentication / Authorization Layer ( Add a Layer to Descrypt User token and Get User Data )
+- Move Cronjob to K8S to avoid Multiple runs for all Replicas we have
 - E2E Test
