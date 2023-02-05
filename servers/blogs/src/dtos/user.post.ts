@@ -6,7 +6,7 @@ import { SegmentType } from '../entities/post.entity';
 export class CreateUserPostDto {
   @IsUUID(undefined, { each: true })
   @Field((type) => [String], { nullable: true })
-  userIds?: string;
+  userIds?: string[];
 
   @Field()
   @IsUUID()

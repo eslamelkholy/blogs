@@ -1,5 +1,6 @@
 import { Field, InputType } from '@nestjs/graphql';
-import { IsString, IsUUID } from 'class-validator';
+import { IsEnum, IsString, IsUUID } from 'class-validator';
+import { SegmentType } from 'src/entities/post.entity';
 
 @InputType()
 export class CreatePostDto {
@@ -18,4 +19,12 @@ export class CreatePostDto {
   @IsUUID()
   @Field()
   userId: string;
+
+  @IsEnum(SegmentType)
+  @Field()
+  segmentType: string;
+
+  @IsUUID(undefined, { each: true })
+  @Field((type) => [String], { nullable: true })
+  userIds?: string[];
 }

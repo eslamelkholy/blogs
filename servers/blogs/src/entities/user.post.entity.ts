@@ -8,7 +8,7 @@ import { User } from './user.entity';
 export class UserToPost {
   @Field()
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id?: string;
 
   @Field()
   @Column()
@@ -19,8 +19,8 @@ export class UserToPost {
   public userId: string;
 
   @ManyToOne(() => Post, (post) => post.userToPost)
-  public post: Post;
+  public post?: Post;
 
   @ManyToOne(() => User, (user) => user.userToPost)
-  public user: User;
+  public user?: User;
 }

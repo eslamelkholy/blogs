@@ -1,16 +1,31 @@
 import { Injectable } from '@nestjs/common';
-import { UserRepository } from '../repositories/user.repository';
 import { UserToPost } from '../entities/user.post.entity';
-import { CreateUserPostDto } from '../dtos/user.post';
+import { Post } from '../entities/post.entity';
+import { CreatePostDto } from '../dtos/post.dto';
+import { UserPostRepository } from '../repositories/user.post.repository';
 
 @Injectable()
 export class UserPostService {
-  constructor(private userRepository: UserRepository) {}
+  constructor(private userPostRepository: UserPostRepository) {}
   async createUserPosts(
-    createUserPostDto: CreateUserPostDto,
-  ): Promise<UserToPost[]> {
-    console.log(createUserPostDto);
+    createPostInput: CreatePostDto,
+    post: Post,
+  ): Promise<void> {
+    const userPosts = this.prepareUserPostData(createPostInput, post);
 
-    return [new UserToPost()];
+    await this.userPostRepository.bulkInsert(userPosts);
+  }
+
+  prepareUserPostData(
+    createPostInput: CreatePostDto,
+    post: Post,
+  ): UserToPost[] {
+    const userPosts: UserToPost[] = [];
+
+    for (const userId of createPostInput.userIds) {
+      userPosts.push({ userId, postId: post.id });
+    }
+
+    return userPosts;
   }
 }

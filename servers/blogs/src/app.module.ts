@@ -16,7 +16,6 @@ import { PostService } from './services/post.service';
 import { PostResolver } from './resolvers/post.resolver';
 import { PostRepository } from './repositories/post.repository';
 import { UserToPost } from './entities/user.post.entity';
-import { UserPostResolver } from './resolvers/user.post.resolver';
 import { UserPostService } from './services/user.post.service';
 import { UserPostRepository } from './repositories/user.post.repository';
 
@@ -49,7 +48,7 @@ import { UserPostRepository } from './repositories/user.post.repository';
       entities: ['dist/entities/*.entity{.ts,.js}'],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([User, Post]),
+    TypeOrmModule.forFeature([User, Post, UserToPost]),
   ],
   controllers: [AppController],
   providers: [
@@ -61,7 +60,6 @@ import { UserPostRepository } from './repositories/user.post.repository';
     PostResolver,
     PostRepository,
     UserToPost,
-    UserPostResolver,
     UserPostService,
     UserPostRepository,
   ],
