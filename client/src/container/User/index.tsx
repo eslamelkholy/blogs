@@ -11,6 +11,7 @@ import Standard from '../../components/Button/Standard';
 import Pagination from '@mui/material/Pagination';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
+import ActionButtons from '../../components/Button/ActionButtons';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -58,19 +59,21 @@ export default function CustomizedTables() {
               <Table sx={{ minWidth: 700 }} aria-label='customized table'>
                 <TableHead>
                   <TableRow>
-                    <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-                    <StyledTableCell align='right'>Calories</StyledTableCell>
-                    <StyledTableCell align='right'>Fat&nbsp;(g)</StyledTableCell>
+                    <StyledTableCell>ID</StyledTableCell>
+                    <StyledTableCell align='right'>Name</StyledTableCell>
+                    <StyledTableCell align='right'>Actions</StyledTableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {rows.map((row) => (
                     <StyledTableRow key={row.name}>
                       <StyledTableCell component='th' scope='row'>
-                        {row.name}
+                        {row.id}
                       </StyledTableCell>
-                      <StyledTableCell align='right'>{row.id}</StyledTableCell>
                       <StyledTableCell align='right'>{row.name}</StyledTableCell>
+                      <StyledTableCell align='right'>
+                        <ActionButtons />
+                      </StyledTableCell>
                     </StyledTableRow>
                   ))}
                 </TableBody>
