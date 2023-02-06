@@ -1,9 +1,10 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { CustomError } from '../errors/custom.error';
 import { ErrorMsg } from '../errors/error.message';
-import { CreateUserDto } from '../dtos/user.dto';
+import { CreateUserDto, UserResponse } from '../dtos/user.dto';
 import { User } from '../entities/user.entity';
 import { UserRepository } from '../repositories/user.repository';
+import { PageOptionsDto } from '../dtos/pagination/page.option.dto';
 
 @Injectable()
 export class UserService {
@@ -55,5 +56,12 @@ export class UserService {
       throw new CustomError(ErrorMsg.NOT_FOUND, HttpStatus.NOT_FOUND);
     }
     return user;
+  }
+
+  async userSearch(
+    email: string,
+    pageOptionDto: PageOptionsDto,
+  ): Promise<UserResponse> {
+    return await this.userRepository.userSearch(pageOptionDto, email);
   }
 }

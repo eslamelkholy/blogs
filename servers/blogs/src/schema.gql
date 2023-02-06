@@ -47,6 +47,11 @@ type PageMetaDto {
   hasNextPage: Boolean!
 }
 
+type UserResponse {
+  entities: [User!]
+  pagination: PageMetaDto!
+}
+
 type PostResponse {
   entities: [Post!]
   pagination: PageMetaDto!
@@ -55,6 +60,7 @@ type PostResponse {
 type Query {
   FindAllUsers: [User!]!
   getUserByEmail(email: String!): User!
+  userSearch(email: String!, pageOptionDto: PageOptionsDto!): UserResponse!
   GetUserPosts(pageOptionDto: PageOptionsDto!): PostResponse!
   GetProfilePosts(pageOptionDto: PageOptionsDto!): PostResponse!
 }
