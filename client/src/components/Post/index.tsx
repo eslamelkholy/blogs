@@ -3,9 +3,9 @@ import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardActionArea from '@mui/material/CardActionArea';
 import CardContent from '@mui/material/CardContent';
-import { Avatar, CardHeader, IconButton } from '@mui/material';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { Avatar, CardHeader } from '@mui/material';
 import { red } from '@mui/material/colors';
+import { Link } from 'react-router-dom';
 
 interface FeaturedPostProps {
   post: {
@@ -36,9 +36,9 @@ export default function FeaturedPost(props: FeaturedPostProps) {
                 </Avatar>
               }
               action={
-                <IconButton aria-label='settings'>
-                  <MoreVertIcon />
-                </IconButton>
+                <Link aria-label='settings' to='/postDetails'>
+                  View
+                </Link>
               }
               title='Shrimp and Chorizo Paella'
               subheader='September 14, 2016'
