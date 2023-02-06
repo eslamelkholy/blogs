@@ -9,3 +9,12 @@ export const mockCreatePostDto: CreatePostDto = {
   userId: cachedUUID,
   userIds: [cachedUUID],
 };
+
+export const mockCreatePostDtoOther: CreatePostDto = {
+  segmentType: 'other',
+  subTitle: 'subTitle',
+  text: 'Textttttttttttt',
+  title: 'Titleeeeeeeee',
+  userId: cachedUUID,
+  userIds: [cachedUUID],
+};
