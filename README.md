@@ -15,8 +15,7 @@ This application to Handle Blogs to Different Types of Users
 - All Queries built Manually using Query Builders expect the straightforward ones
 
 ### ERD Diagram
-
-![blog drawio](https://user-images.githubusercontent.com/55209776/216788581-15251003-f157-44cd-bb67-8740a82affe5.png)
+![blog drawio (3)](https://user-images.githubusercontent.com/55209776/217027977-88ab0c34-a37a-417a-b8de-1e8a3b5cc752.png)
 
 ### Follow Up
 
@@ -25,3 +24,7 @@ This application to Handle Blogs to Different Types of Users
 - Having Authentication / Authorization Layer ( Add a Layer to Descrypt User token and Get User Data )
 - Move Cronjob to K8S to avoid Multiple runs for all Replicas we have
 - E2E Test
+
+
+### Pircutres
+![MainSearch](https://user-images.githubusercontent.com/55209776/217028321-e91725e3-ae9a-4a8d-a715-1f823d4d7f2d.png)
