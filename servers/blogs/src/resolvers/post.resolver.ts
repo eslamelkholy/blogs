@@ -3,8 +3,9 @@ import { Resolver, Mutation, Args, Query, Context } from '@nestjs/graphql';
 import { UserGuard } from '../guards/admin.guard';
 import { Post } from '../entities/post.entity';
 import { PostService } from '../services/post.service';
-import { CreatePostDto, PostResponse } from '../dtos/post.dto';
+import { CreatePostDto, NewPostViewDto, PostResponse } from '../dtos/post.dto';
 import { PageOptionsDto } from '../dtos/pagination/page.option.dto';
+import { PostViews } from '../entities/post.views.entity';
 
 @Resolver(() => Post)
 export class PostResolver {
@@ -37,5 +38,10 @@ export class PostResolver {
     );
   }
 
-  // TODO: Logger
+  @Mutation(() => PostViews, { name: 'newPostView' })
+  newPostView(
+    @Args('newPostViewDto') newPostViewDto: NewPostViewDto,
+  ): Promise<PostViews> {
+    return this.postService.newPostView(newPostViewDto);
+  }
 }

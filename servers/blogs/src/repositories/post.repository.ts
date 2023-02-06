@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, SelectQueryBuilder } from 'typeorm';
 import { Post, PostStatus } from '../entities/post.entity';
-import { CreatePostDto, PostResponse } from '../dtos/post.dto';
+import { CreatePostDto, NewPostViewDto, PostResponse } from '../dtos/post.dto';
 import { PageOptionsDto } from '../dtos/pagination/page.option.dto';
 import { PageMetaDto } from '../dtos/pagination/page.meta.dto';
 import { User } from '../entities/user.entity';
@@ -33,6 +33,16 @@ export class PostRepository {
     });
 
     return new PostResponse(entities, pageMetaDto);
+  }
+
+  async newPostView(newPostViewDto: NewPostViewDto): Promise<void> {
+    const queryBuilder = this.postRepository.createQueryBuilder('post');
+
+    await queryBuilder
+      .update(Post)
+      .where('post.id = :id', { id: newPostViewDto.postId })
+      .set({ totalPostViews: () => '"totalPostViews" + 1' })
+      .execute();
   }
 
   async getProfilePosts(

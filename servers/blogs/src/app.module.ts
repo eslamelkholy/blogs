@@ -21,6 +21,8 @@ import { UserPostService } from './services/user.post.service';
 import { UserPostRepository } from './repositories/user.post.repository';
 import { PostJobService } from './jobs/post.job';
 import { PostViews } from './entities/post.views.entity';
+import { PostViewsRepository } from './repositories/post.views.repository';
+import { PostViewService } from './services/post.views.service';
 
 @Module({
   imports: [
@@ -52,7 +54,7 @@ import { PostViews } from './entities/post.views.entity';
       entities: ['dist/entities/*.entity{.ts,.js}'],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([User, Post, UserToPost]),
+    TypeOrmModule.forFeature([User, Post, UserToPost, PostViews]),
   ],
   controllers: [AppController],
   providers: [
@@ -67,7 +69,8 @@ import { PostViews } from './entities/post.views.entity';
     UserPostService,
     UserPostRepository,
     PostJobService,
-    PostViews,
+    PostViewService,
+    PostViewsRepository,
   ],
 })
 export class AppModule {}

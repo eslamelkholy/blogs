@@ -12,6 +12,7 @@ This application to Handle Blogs to Different Types of Users
 - Generic Pagination Service
 - CRONG Job
 - Containerized App Within Docker compose for easy Development Environment
+- All Queries built Manually using Query Builders expect the straightforward ones
 
 ### ERD Diagram
 

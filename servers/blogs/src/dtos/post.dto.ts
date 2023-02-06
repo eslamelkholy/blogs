@@ -31,6 +31,17 @@ export class CreatePostDto {
   userIds?: string[];
 }
 
+@InputType()
+export class NewPostViewDto {
+  @IsUUID()
+  @Field()
+  userId: string;
+
+  @IsUUID()
+  @Field()
+  postId: string;
+}
+
 @ObjectType()
 export class PostResponse implements PaginatedResultSet<Post> {
   @Field(() => [Post], { nullable: true })

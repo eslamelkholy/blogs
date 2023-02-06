@@ -1,12 +1,14 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { Post, SegmentType } from '../entities/post.entity';
-import { CreatePostDto, PostResponse } from '../dtos/post.dto';
+import { CreatePostDto, NewPostViewDto, PostResponse } from '../dtos/post.dto';
 import { PostRepository } from '../repositories/post.repository';
 import { UserService } from './user.service';
 import { UserPostService } from './user.post.service';
 import { PageOptionsDto } from '../dtos/pagination/page.option.dto';
 import { CustomError } from '../errors/custom.error';
 import { ErrorMsg } from '../errors/error.message';
+import { PostViewService } from './post.views.service';
+import { PostViews } from '../entities/post.views.entity';
 
 @Injectable()
 export class PostService {
@@ -14,6 +16,7 @@ export class PostService {
     private postRepository: PostRepository,
     private userService: UserService,
     private userPostService: UserPostService,
+    private postViewService: PostViewService,
   ) {}
   async createPost(createPostInput: CreatePostDto): Promise<Post> {
     await this.userService.getUserById(createPostInput.userId);
@@ -53,5 +56,20 @@ export class PostService {
 
   async publishPosts(): Promise<void> {
     await this.postRepository.publishPosts();
+  }
+
+  async newPostView(newPostViewDto: NewPostViewDto): Promise<PostViews> {
+    const postView = await this.postViewService.getCurrentPostViews(
+      newPostViewDto,
+    );
+
+    if (postView) {
+      return postView;
+    }
+
+    await this.postRepository.newPostView(newPostViewDto);
+    const newpostView = await this.postViewService.addPostViews(newPostViewDto);
+
+    return newpostView;
   }
 }

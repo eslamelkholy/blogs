@@ -52,6 +52,10 @@ export class Post {
   postStatus: string;
 
   @Field()
+  @Column({ type: 'int', default: 0 })
+  totalPostViews: number;
+
+  @Field()
   @Column()
   userId: string;
 
