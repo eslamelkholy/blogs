@@ -26,7 +26,7 @@ export default function FeaturedPost(props: FeaturedPostProps) {
   const { post, role } = props;
 
   return (
-    <Grid item xs={12} md={8}>
+    <Grid item xs={12} md={8} margin={2}>
       <CardActionArea component='a'>
         <Card sx={{ display: 'flex' }}>
           <CardContent sx={{ flex: 1 }}>
@@ -53,9 +53,9 @@ export default function FeaturedPost(props: FeaturedPostProps) {
             <Typography variant='subtitle1' paragraph>
               {post.description}
             </Typography>
-            <Typography variant='subtitle1' color='primary'>
+            <Link aria-label='settings' to={`/postDetails/${post.id}`}>
               Continue reading...
-            </Typography>
+            </Link>
             {role.role === 'admin' && (
               <Typography variant='subtitle1' align='right' color='primary'>
                 {post.views} View
