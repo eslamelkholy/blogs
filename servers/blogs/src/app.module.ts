@@ -20,6 +20,7 @@ import { UserToPost } from './entities/user.post.entity';
 import { UserPostService } from './services/user.post.service';
 import { UserPostRepository } from './repositories/user.post.repository';
 import { PostJobService } from './jobs/post.job';
+import { PostViews } from './entities/post.views.entity';
 
 @Module({
   imports: [
@@ -66,6 +67,7 @@ import { PostJobService } from './jobs/post.job';
     UserPostService,
     UserPostRepository,
     PostJobService,
+    PostViews,
   ],
 })
 export class AppModule {}

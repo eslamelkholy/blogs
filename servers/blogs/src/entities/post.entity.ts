@@ -8,6 +8,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { PostViews } from './post.views.entity';
 import { User } from './user.entity';
 import { UserToPost } from './user.post.entity';
 
@@ -75,4 +76,7 @@ export class Post {
 
   @OneToMany(() => UserToPost, (userToPost) => userToPost.post)
   public userToPost: UserToPost[];
+
+  @OneToMany(() => PostViews, (postViews) => postViews.post)
+  public postViews: PostViews[];
 }
