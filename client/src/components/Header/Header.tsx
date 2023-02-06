@@ -6,10 +6,13 @@ import { Link } from 'react-router-dom';
 
 interface HeaderProps {
   title: string;
+  role: {
+    role: string;
+  };
 }
 
 export default function Header(props: HeaderProps) {
-  const { title } = props;
+  const { title, role } = props;
 
   return (
     <React.Fragment>
@@ -17,9 +20,11 @@ export default function Header(props: HeaderProps) {
         <Typography component='h2' variant='h5' color='inherit' align='center' noWrap sx={{ flex: 1 }}>
           {title}
         </Typography>
-        <Button variant='outlined' size='small'>
-          <Link to='/users'>Users</Link>
-        </Button>
+        {role.role === 'admin' && (
+          <Button variant='outlined' size='small'>
+            <Link to='/users'>Users</Link>
+          </Button>
+        )}
       </Toolbar>
       <Toolbar component='nav' variant='dense' sx={{ justifyContent: 'space-between', overflowX: 'auto' }}></Toolbar>
     </React.Fragment>
