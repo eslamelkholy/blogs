@@ -20,7 +20,10 @@ const theme = createTheme();
 export default function BlogDetails(props: any) {
   const [role, setRole] = useState({ role: 'user' });
   const { id } = useParams();
-  console.log({ id });
+
+  useEffect(() => {
+    // call api
+  }, []);
 
   useEffect(() => {
     const userRole = JSON.parse(localStorage.getItem('role') as any);

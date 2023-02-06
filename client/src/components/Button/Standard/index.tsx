@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 export default function Standard() {
   return (
     <React.Fragment>
-      <Button variant='outlined' size='small' color='success'>
+      <Button variant='contained' size='large' color='success'>
         Create
       </Button>
     </React.Fragment>

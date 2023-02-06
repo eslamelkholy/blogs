@@ -1,13 +1,16 @@
 import { styled } from '@mui/material/styles';
-import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import Table from '@mui/material/Table';
+
 import Paper from '@mui/material/Paper';
-import ActionButtons from '../../components/Button/ActionButtons';
 import Standard from '../../components/Button/Standard';
+import Pagination from '@mui/material/Pagination';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Unstable_Grid2';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -43,29 +46,44 @@ const rows = [
 
 export default function CustomizedTables() {
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label='customized table'>
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>ID</StyledTableCell>
-            <StyledTableCell>Name</StyledTableCell>
-            <StyledTableCell align='right'>Actions</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
-              <StyledTableCell component='th' scope='row'>
-                {row.id}
-              </StyledTableCell>
-              <StyledTableCell>{row.name}</StyledTableCell>
-              <StyledTableCell align='right'>
-                <ActionButtons />
-              </StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <>
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid container spacing={2}>
+          <Grid xs={2}></Grid>
+          <Grid xs={8}>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '20px' }}>
+              <Standard />
+            </div>
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 700 }} aria-label='customized table'>
+                <TableHead>
+                  <TableRow>
+                    <StyledTableCell>Dessert (100g serving)</StyledTableCell>
+                    <StyledTableCell align='right'>Calories</StyledTableCell>
+                    <StyledTableCell align='right'>Fat&nbsp;(g)</StyledTableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rows.map((row) => (
+                    <StyledTableRow key={row.name}>
+                      <StyledTableCell component='th' scope='row'>
+                        {row.name}
+                      </StyledTableCell>
+                      <StyledTableCell align='right'>{row.id}</StyledTableCell>
+                      <StyledTableCell align='right'>{row.name}</StyledTableCell>
+                    </StyledTableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Grid>
+          <Grid xs={2}></Grid>
+        </Grid>
+      </Box>
+
+      <div style={{ display: 'flex', justifyContent: 'center', margin: '20px' }}>
+        <Pagination count={50} color='primary' />
+      </div>
+    </>
   );
 }
