@@ -76,9 +76,7 @@
       "^.+\\.(t|j)s$": "ts-jest"
     },
     "collectCoverageFrom": [
-      "src/helpers/*.ts",
-      "src/v2/consumers/*.ts",
-      "src/v2/services/*.ts"
+      "src/services/*.ts"
     ],
     "coveragePathIgnorePatterns": [],
     "coverageDirectory": "coverage",

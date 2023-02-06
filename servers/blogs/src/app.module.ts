@@ -4,7 +4,6 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ScheduleModule } from '@nestjs/schedule';
 import { join } from 'path';
 import { AppController } from './app.controller';
-import { AppService } from './services/app.service';
 import { UserResolver } from './resolvers/user.resolver';
 import { UserService } from './services/user.service';
 import { ConfigModule } from '@nestjs/config';
@@ -58,7 +57,6 @@ import { PostViewService } from './services/post.views.service';
   ],
   controllers: [AppController],
   providers: [
-    AppService,
     UserService,
     UserResolver,
     UserRepository,
