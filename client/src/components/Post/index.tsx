@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 
 interface FeaturedPostProps {
   post: {
+    id: number;
     date: string;
     description: string;
     image: string;
@@ -36,7 +37,7 @@ export default function FeaturedPost(props: FeaturedPostProps) {
                 </Avatar>
               }
               action={
-                <Link aria-label='settings' to='/postDetails'>
+                <Link aria-label='settings' to={`/postDetails/${post.id}`}>
                   View
                 </Link>
               }

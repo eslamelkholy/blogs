@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
 
 const AllPosts = [
   {
+    id: 1,
     title: 'Featured post',
     date: 'Nov 12',
     description: 'This is a wider card with supporting text below as a natural lead-in to additional content.',
@@ -15,6 +16,7 @@ const AllPosts = [
     views: 5000,
   },
   {
+    id: 2,
     title: 'Post title',
     date: 'Nov 11',
     description: 'This is a wider card with supporting text below as a natural lead-in to additional content.',
@@ -23,6 +25,7 @@ const AllPosts = [
     views: 5000,
   },
   {
+    id: 3,
     title: 'Featured post',
     date: 'Nov 12',
     description: 'This is a wider card with supporting text below as a natural lead-in to additional content.',
@@ -31,6 +34,7 @@ const AllPosts = [
     views: 5000,
   },
   {
+    id: 4,
     title: 'Post title',
     date: 'Nov 11',
     description: 'This is a wider card with supporting text below as a natural lead-in to additional content.',
@@ -42,6 +46,7 @@ const AllPosts = [
 
 const adminPosts = [
   {
+    id: 1,
     title: 'Featured post',
     date: 'Nov 12',
     description: 'This is a wider card with supporting text below as a natural lead-in to additional content.',
@@ -54,7 +59,7 @@ const adminPosts = [
 const theme = createTheme();
 
 export default function Blog() {
-  const [role, setRole] = useState({ role: 'admin' });
+  const [role, setRole] = useState({ role: 'user' });
 
   useEffect(() => {
     const userRole = JSON.parse(localStorage.getItem('role') as any);

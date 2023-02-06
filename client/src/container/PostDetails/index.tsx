@@ -2,6 +2,8 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState, useEffect } from 'react';
+import { useParams } from 'react-router';
+
 import FeaturedPostDetails from '../../components/PostDetails';
 
 const singlePost = {
@@ -15,8 +17,10 @@ const singlePost = {
 
 const theme = createTheme();
 
-export default function Blog() {
-  const [role, setRole] = useState({ role: 'admin' });
+export default function BlogDetails(props: any) {
+  const [role, setRole] = useState({ role: 'user' });
+  const { id } = useParams();
+  console.log({ id });
 
   useEffect(() => {
     const userRole = JSON.parse(localStorage.getItem('role') as any);
