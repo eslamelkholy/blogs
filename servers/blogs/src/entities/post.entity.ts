@@ -76,11 +76,11 @@ export class Post {
 
   @ManyToOne(() => User, (user) => user.posts)
   @Field((type) => User)
-  user: User;
+  user?: User;
 
   @OneToMany(() => UserToPost, (userToPost) => userToPost.post)
-  public userToPost: UserToPost[];
+  public userToPost?: UserToPost[];
 
   @OneToMany(() => PostViews, (postViews) => postViews.post)
-  public postViews: PostViews[];
+  public postViews?: PostViews[];
 }
