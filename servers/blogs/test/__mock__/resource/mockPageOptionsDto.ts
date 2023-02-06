@@ -1,4 +1,4 @@
-import { PageOptionsDto } from "../../../src/dtos/pagination/page.option.dto";
+import { PageOptionsDto } from '../../../src/dtos/pagination/page.option.dto';
 
 export const mockPageOptionsDto: PageOptionsDto = {
   take: 10,

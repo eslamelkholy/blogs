@@ -1,5 +1,5 @@
-import { UserResponse } from "../../../src/dtos/user.dto";
-import { usersList } from "./users";
+import { UserResponse } from '../../../src/dtos/user.dto';
+import { usersList } from './users';
 
 export const mockUserResponse: UserResponse = {
   pagination: {

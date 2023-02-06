@@ -57,8 +57,8 @@ export class User {
   posts?: Post[];
 
   @OneToMany(() => UserToPost, (userToPost) => userToPost.user)
-  public userToPost: UserToPost[];
+  public userToPost?: UserToPost[];
 
   @OneToMany(() => PostViews, (postViews) => postViews.user)
-  public postViews: PostViews[];
+  public postViews?: PostViews[];
 }

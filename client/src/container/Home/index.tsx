@@ -3,6 +3,7 @@ import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import FeaturedPost from '../Post';
+import { useState, useEffect } from 'react';
 
 const featuredPosts = [
   {
@@ -24,6 +25,14 @@ const featuredPosts = [
 const theme = createTheme();
 
 export default function Blog() {
+  const [role, setRole] = useState({ role: 'admin' });
+
+  useEffect(() => {
+    const userRole = JSON.parse(localStorage.getItem('role') as any);
+    if (userRole) {
+      setRole(userRole);
+    }
+  }, []);
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
