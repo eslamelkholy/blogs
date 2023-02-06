@@ -3,4 +3,6 @@ export const mockUserRepository = () => ({
   createUser: jest.fn(),
   getUserByEmail: jest.fn(),
   deleteUser: jest.fn(),
+  getUserById: jest.fn(),
+  userSearch: jest.fn(),
 });
