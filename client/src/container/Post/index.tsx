@@ -6,7 +6,6 @@ import CardContent from '@mui/material/CardContent';
 import { Avatar, CardHeader, IconButton } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { red } from '@mui/material/colors';
-import ActionButtons from '../../components/Button/ActionButtons';
 
 interface FeaturedPostProps {
   post: {
@@ -15,11 +14,15 @@ interface FeaturedPostProps {
     image: string;
     imageLabel: string;
     title: string;
+    views: number;
+  };
+  role: {
+    role: string;
   };
 }
 
 export default function FeaturedPost(props: FeaturedPostProps) {
-  const { post } = props;
+  const { post, role } = props;
 
   return (
     <Grid item xs={12} md={8}>
@@ -52,7 +55,11 @@ export default function FeaturedPost(props: FeaturedPostProps) {
             <Typography variant='subtitle1' color='primary'>
               Continue reading...
             </Typography>
-            <ActionButtons />
+            {role.role === 'admin' && (
+              <Typography variant='subtitle1' align='right' color='primary'>
+                {post.views} View
+              </Typography>
+            )}
           </CardContent>
         </Card>
       </CardActionArea>

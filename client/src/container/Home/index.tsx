@@ -5,13 +5,14 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import FeaturedPost from '../Post';
 import { useState, useEffect } from 'react';
 
-const featuredPosts = [
+const AllPosts = [
   {
     title: 'Featured post',
     date: 'Nov 12',
     description: 'This is a wider card with supporting text below as a natural lead-in to additional content.',
     image: 'https://source.unsplash.com/random',
     imageLabel: 'Image Text',
+    views: 5000,
   },
   {
     title: 'Post title',
@@ -19,6 +20,34 @@ const featuredPosts = [
     description: 'This is a wider card with supporting text below as a natural lead-in to additional content.',
     image: 'https://source.unsplash.com/random',
     imageLabel: 'Image Text',
+    views: 5000,
+  },
+  {
+    title: 'Featured post',
+    date: 'Nov 12',
+    description: 'This is a wider card with supporting text below as a natural lead-in to additional content.',
+    image: 'https://source.unsplash.com/random',
+    imageLabel: 'Image Text',
+    views: 5000,
+  },
+  {
+    title: 'Post title',
+    date: 'Nov 11',
+    description: 'This is a wider card with supporting text below as a natural lead-in to additional content.',
+    image: 'https://source.unsplash.com/random',
+    imageLabel: 'Image Text',
+    views: 5000,
+  },
+];
+
+const adminPosts = [
+  {
+    title: 'Featured post',
+    date: 'Nov 12',
+    description: 'This is a wider card with supporting text below as a natural lead-in to additional content.',
+    image: 'https://source.unsplash.com/random',
+    imageLabel: 'Image Text',
+    views: 5000,
   },
 ];
 
@@ -38,11 +67,19 @@ export default function Blog() {
       <CssBaseline />
       <Container maxWidth='lg'>
         <main>
-          <Grid container spacing={4}>
-            {featuredPosts.map((post) => (
-              <FeaturedPost key={post.title} post={post} />
-            ))}
-          </Grid>
+          {role.role === 'admin' ? (
+            <Grid container spacing={4}>
+              {adminPosts.map((post) => (
+                <FeaturedPost key={post.title} post={post} role={role} />
+              ))}
+            </Grid>
+          ) : (
+            <Grid container spacing={4}>
+              {AllPosts.map((post) => (
+                <FeaturedPost key={post.title} post={post} role={role} />
+              ))}
+            </Grid>
+          )}
         </main>
       </Container>
     </ThemeProvider>
