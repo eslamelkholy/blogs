@@ -6,16 +6,16 @@ import CardContent from '@mui/material/CardContent';
 import { Avatar, CardHeader } from '@mui/material';
 import { red } from '@mui/material/colors';
 import { Link } from 'react-router-dom';
+import { dateParse } from '../../util/date';
 
 interface FeaturedPostProps {
   post: {
     id: number;
-    date: string;
-    description: string;
-    image: string;
-    imageLabel: string;
+    created_at: string;
+    text: string;
     title: string;
-    views: number;
+    subTitle: string;
+    totalPostViews: number;
   };
   role: string;
 }
@@ -24,9 +24,9 @@ export default function FeaturedPost(props: FeaturedPostProps) {
   const { post, role } = props;
 
   return (
-    <Grid item xs={12} md={8} margin={2}>
+    <Grid item md={12} margin={2} width={'100%'}>
       <CardActionArea component='a'>
-        <Card sx={{ display: 'flex' }}>
+        <Card>
           <CardContent sx={{ flex: 1 }}>
             <CardHeader
               avatar={
@@ -39,24 +39,22 @@ export default function FeaturedPost(props: FeaturedPostProps) {
                   View
                 </Link>
               }
-              title='Shrimp and Chorizo Paella'
-              subheader='September 14, 2016'
+              title={post.title}
+              subheader={dateParse(post.created_at)}
             />
             <Typography component='h2' variant='h5'>
-              {post.title}
+              {post.subTitle}
             </Typography>
-            <Typography variant='subtitle1' color='text.secondary'>
-              {post.date}
-            </Typography>
+            <Typography variant='subtitle1' color='text.secondary'></Typography>
             <Typography variant='subtitle1' paragraph>
-              {post.description}
+              {post.text}
             </Typography>
             <Link aria-label='settings' to={`/postDetails/${post.id}`}>
               Continue reading...
             </Link>
             {role === 'admin' && (
               <Typography variant='subtitle1' align='right' color='primary'>
-                {post.views} View
+                {post.totalPostViews} View
               </Typography>
             )}
           </CardContent>

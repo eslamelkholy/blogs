@@ -8,7 +8,6 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { GET_USER_POSTS } from '../../GraphQL/Queries';
 import { GET_USER_EMAIL } from '../../GraphQL/user';
 import { useQuery } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
@@ -19,7 +18,6 @@ export default function SignIn() {
   const [email, setEmail] = useState('');
   const { error, loading, data } = useQuery(GET_USER_EMAIL, { variables: { email } });
   const navigate = useNavigate();
-  // const { error, loading, data } = useQuery(GET_USER_POSTS, { variables: { pageOptionDto: { take: 10, page: 1 }, userId: 'Idddd' } });
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

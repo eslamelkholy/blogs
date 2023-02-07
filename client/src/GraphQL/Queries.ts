@@ -10,6 +10,13 @@ export const GET_USER_POSTS = gql`
         text
         segmentType
         postStatus
+        created_at
+      }
+      pagination {
+        pageCount
+        itemCount
+        hasNextPage
+        hasPreviousPage
       }
     }
   }
