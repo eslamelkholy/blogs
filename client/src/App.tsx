@@ -5,6 +5,7 @@ import PostDetails from './container/PostDetails';
 import Header from './components/Header/Header';
 import Blog from './container/Home';
 import Users from './container/User';
+import SignIn from './container/Singin';
 
 function App() {
   const [role, setRole] = useState({ role: 'user' });
@@ -26,6 +27,7 @@ function App() {
 
       <Routes>
         <Route path='/' element={<Blog />} />
+        <Route path='/signin' element={<SignIn />} />
         <Route path='users' element={<Users />} />
         <Route path='postDetails/:id' element={<PostDetails />} />
       </Routes>

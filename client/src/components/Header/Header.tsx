@@ -11,10 +11,14 @@ interface HeaderProps {
   };
 }
 
+const signInPage = () => {
+  return !window.location.href.toString().includes('signin');
+};
+
 export default function Header(props: HeaderProps) {
   const { title, role } = props;
 
-  return (
+  return signInPage() ? (
     <React.Fragment>
       <Toolbar sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Typography component='h2' variant='h5' color='inherit' align='center' noWrap sx={{ flex: 1 }}>
@@ -28,5 +32,7 @@ export default function Header(props: HeaderProps) {
       </Toolbar>
       <Toolbar component='nav' variant='dense' sx={{ justifyContent: 'space-between', overflowX: 'auto' }}></Toolbar>
     </React.Fragment>
+  ) : (
+    <></>
   );
 }
