@@ -61,7 +61,7 @@ type Query {
   FindAllUsers: [User!]!
   getUserByEmail(email: String!): User!
   userSearch(email: String!, pageOptionDto: PageOptionsDto!): UserResponse!
-  GetUserPosts(pageOptionDto: PageOptionsDto!): PostResponse!
+  GetUserPosts(pageOptionDto: PageOptionsDto!, userId: String!): PostResponse!
   GetProfilePosts(pageOptionDto: PageOptionsDto!): PostResponse!
 }
 

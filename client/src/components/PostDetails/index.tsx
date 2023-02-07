@@ -15,9 +15,7 @@ interface FeaturedPostProps {
     title: string;
     views: number;
   };
-  role: {
-    role: string;
-  };
+  role: string;
 }
 
 export default function FeaturedPostDetails(props: FeaturedPostProps) {
@@ -49,7 +47,7 @@ export default function FeaturedPostDetails(props: FeaturedPostProps) {
             <Typography variant='subtitle1' color='primary'>
               Continue reading...
             </Typography>
-            {role.role === 'admin' && (
+            {role === 'admin' && (
               <Typography variant='subtitle1' align='right' color='primary'>
                 {post.views} View
               </Typography>

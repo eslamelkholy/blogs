@@ -81,10 +81,10 @@ const adminPosts = [
 const theme = createTheme();
 
 export default function Blog() {
-  const [role, setRole] = useState({ role: 'user' });
+  const [role, setRole] = useState('user');
 
   useEffect(() => {
-    const userRole = JSON.parse(localStorage.getItem('role') as any);
+    const userRole = localStorage.getItem('role');
     if (userRole) {
       setRole(userRole);
     }
@@ -98,7 +98,7 @@ export default function Blog() {
             <Grid xs={2}></Grid>
             <Grid xs={8}>
               <main>
-                {role.role === 'admin' ? (
+                {role === 'admin' ? (
                   <Grid container spacing={4}>
                     {adminPosts.map((post) => (
                       <FeaturedPost key={post.title} post={post} role={role} />

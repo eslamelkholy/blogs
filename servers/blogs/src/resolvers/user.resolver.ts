@@ -17,7 +17,6 @@ export class UserResolver {
   }
 
   @Query(() => User, { name: 'getUserByEmail' })
-  @UseGuards(UserGuard)
   getUserByEmail(
     @Args('email', { type: () => String }) email: string,
   ): Promise<User> {

@@ -17,9 +17,7 @@ interface FeaturedPostProps {
     title: string;
     views: number;
   };
-  role: {
-    role: string;
-  };
+  role: string;
 }
 
 export default function FeaturedPost(props: FeaturedPostProps) {
@@ -56,7 +54,7 @@ export default function FeaturedPost(props: FeaturedPostProps) {
             <Link aria-label='settings' to={`/postDetails/${post.id}`}>
               Continue reading...
             </Link>
-            {role.role === 'admin' && (
+            {role === 'admin' && (
               <Typography variant='subtitle1' align='right' color='primary'>
                 {post.views} View
               </Typography>

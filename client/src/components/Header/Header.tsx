@@ -6,9 +6,7 @@ import { Link } from 'react-router-dom';
 
 interface HeaderProps {
   title: string;
-  role: {
-    role: string;
-  };
+  role: string;
 }
 
 const signInPage = () => {
@@ -24,7 +22,7 @@ export default function Header(props: HeaderProps) {
         <Typography component='h2' variant='h5' color='inherit' align='center' noWrap sx={{ flex: 1 }}>
           {title}
         </Typography>
-        {role.role === 'admin' && (
+        {role === 'admin' && (
           <Button variant='outlined' size='small'>
             <Link to='/users'>Users</Link>
           </Button>
