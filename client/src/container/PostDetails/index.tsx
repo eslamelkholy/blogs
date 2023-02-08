@@ -20,7 +20,7 @@ export default function BlogDetails(props: any) {
     variables: { postId: id },
   });
 
-  const [newPostView, { error: viewError }] = useMutation(PAGE_VIEW_MUTATION);
+  const [newPostView] = useMutation(PAGE_VIEW_MUTATION);
   useEffect(() => {
     if (!error && data) {
       setPost(data.GetPost);

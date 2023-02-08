@@ -5,25 +5,40 @@ import { useQuery } from '@apollo/client';
 import { RoleProps, Post } from './types';
 import { GET_USER_POSTS } from '../../GraphQL/Queries/Timeline.ts';
 import { defaultPaginationDto } from '../../util/pagination';
+import { PaginationMetaDto } from '../pagination/paginationDto';
+import { Pagination } from '@mui/material';
 
 export default function UserPostPage(props: RoleProps) {
   const { role } = props;
   const [posts, setPosts] = useState<Post[]>([]);
-  const { error, loading, data } = useQuery(GET_USER_POSTS, {
-    variables: { pageOptionDto: defaultPaginationDto, userId: localStorage.getItem('id') },
+  const [paginationData, setPaginationData] = useState<PaginationMetaDto>(defaultPaginationDto);
+  const [currentPage, setCurrentPage] = useState(1);
+  const { error, loading, data, refetch } = useQuery(GET_USER_POSTS, {
+    variables: { pageOptionDto: { take: paginationData.take, page: currentPage }, userId: localStorage.getItem('id') },
   });
-
   useEffect(() => {
     if (!error && data) {
       setPosts(data.GetUserPosts.entities);
+      setPaginationData({ ...data.GetUserPosts.pagination, take: paginationData.take, page: currentPage });
     }
   }, [data, error, loading]);
+
+  useEffect(() => {
+    refetch({ pageOptionDto: { take: paginationData.take, page: currentPage }, userId: localStorage.getItem('id') });
+  }, [currentPage]);
+
+  const handleChangePage = (event: React.ChangeEvent<unknown>, value: number) => {
+    setCurrentPage(value);
+  };
 
   return (
     <Grid container md={12} spacing={4}>
       {posts.map((post) => (
         <FeaturedPost key={post.id} post={post} role={role} />
       ))}
+      <div style={{ display: 'flex', justifyContent: 'center', margin: '20px' }}>
+        <Pagination count={paginationData?.pageCount || 1} color='primary' onChange={handleChangePage} />
+      </div>
     </Grid>
   );
 }

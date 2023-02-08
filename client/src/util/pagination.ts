@@ -1,10 +1,6 @@
-export interface PageMetaDto {
-  page: number;
+import { PaginationMetaDto } from '../container/pagination/paginationDto';
 
-  take: number;
-}
-
-export const defaultPaginationDto: PageMetaDto = {
+export const defaultPaginationDto: PaginationMetaDto = {
   page: 1,
-  take: 20,
+  take: 10,
 };

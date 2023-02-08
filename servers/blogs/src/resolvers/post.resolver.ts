@@ -1,5 +1,5 @@
 import { UseGuards } from '@nestjs/common';
-import { Resolver, Mutation, Args, Query, Context } from '@nestjs/graphql';
+import { Resolver, Mutation, Args, Query } from '@nestjs/graphql';
 import { UserGuard } from '../guards/admin.guard';
 import { Post } from '../entities/post.entity';
 import { PostService } from '../services/post.service';

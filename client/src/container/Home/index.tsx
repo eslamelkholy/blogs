@@ -35,9 +35,6 @@ export default function Blog() {
             <Grid xs={2}></Grid>
           </Grid>
         </Box>
-        <div style={{ display: 'flex', justifyContent: 'center', margin: '20px' }}>
-          <Pagination count={50} color='primary' />
-        </div>
       </Container>
     </ThemeProvider>
   );
