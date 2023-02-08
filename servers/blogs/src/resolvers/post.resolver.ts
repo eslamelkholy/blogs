@@ -30,12 +30,9 @@ export class PostResolver {
   @Query(() => PostResponse, { name: 'GetProfilePosts' })
   getProfilePosts(
     @Args('pageOptionDto') pageOptionDto: PageOptionsDto,
-    @Context('req') req,
+    @Args('userId') userId: string,
   ): Promise<PostResponse> {
-    return this.postService.getProfilePosts(
-      pageOptionDto,
-      req.body.variables.id,
-    );
+    return this.postService.getProfilePosts(pageOptionDto, userId);
   }
 
   @Mutation(() => PostViews, { name: 'newPostView' })

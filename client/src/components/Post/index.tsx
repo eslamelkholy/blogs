@@ -54,7 +54,7 @@ export default function FeaturedPost(props: FeaturedPostProps) {
             </Link>
             {role === 'admin' && (
               <Typography variant='subtitle1' align='right' color='primary'>
-                {post.totalPostViews} View
+                {post.totalPostViews} Total Views
               </Typography>
             )}
           </CardContent>

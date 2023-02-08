@@ -3,42 +3,22 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import FeaturedPost from '../../components/Post';
 import { useState, useEffect } from 'react';
 import Pagination from '@mui/material/Pagination';
-import { GET_USER_POSTS } from '../../GraphQL/Queries';
-import { useQuery } from '@apollo/client';
+import AdminPostPage from './admin';
+import UserPostPage from './user';
 
 const theme = createTheme();
 
-interface Posts {
-  id: number;
-  created_at: string;
-  text: string;
-  title: string;
-  totalPostViews: number;
-  subTitle: string;
-}
-
 export default function Blog() {
-  const { error, loading, data } = useQuery(GET_USER_POSTS, {
-    variables: { pageOptionDto: { take: 10, page: 1 }, userId: localStorage.getItem('id') },
-  });
-  const [role, setRole] = useState('user');
-  const [posts, setPosts] = useState<Posts[]>([]);
-
-  useEffect(() => {
-    if (!error && data) {
-      setPosts(data.GetUserPosts.entities);
-    }
-  }, [data, error, loading]);
-
+  const [role, setRole] = useState('');
   useEffect(() => {
     const userRole = localStorage.getItem('role');
     if (userRole) {
       setRole(userRole);
     }
   }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -46,15 +26,8 @@ export default function Blog() {
         <Box sx={{ flexGrow: 1 }}>
           <Grid container md={10} spacing={4}>
             <Grid xs={2}></Grid>
-            <Grid xs={8}>
-              <main>
-                <Grid container md={12} spacing={4}>
-                  {posts.map((post) => (
-                    <FeaturedPost key={post.id} post={post} role={role} />
-                  ))}
-                </Grid>
-              </main>
-            </Grid>
+
+            {role && <Grid xs={8}>{role === 'admin' ? <AdminPostPage role={role} /> : <UserPostPage role={role} />}</Grid>}
             <Grid xs={2}></Grid>
           </Grid>
         </Box>

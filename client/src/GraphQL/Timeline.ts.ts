@@ -21,3 +21,26 @@ export const GET_USER_POSTS = gql`
     }
   }
 `;
+
+export const GET_ADMIN_POSTS = gql`
+  query GetProfilePosts($pageOptionDto: PageOptionsDto!, $userId: String!) {
+    GetProfilePosts(pageOptionDto: $pageOptionDto, userId: $userId) {
+      entities {
+        id
+        title
+        subTitle
+        text
+        segmentType
+        postStatus
+        created_at
+        totalPostViews
+      }
+      pagination {
+        pageCount
+        itemCount
+        hasNextPage
+        hasPreviousPage
+      }
+    }
+  }
+`;
