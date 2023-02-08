@@ -4,20 +4,11 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 
-import FeaturedPostDetails from '../../components/PostDetails';
 import { Post } from '../Home/types';
-import { useQuery } from '@apollo/client';
-import { GET_POST_DETAILS } from '../../GraphQL/post';
+import { useMutation, useQuery } from '@apollo/client';
+import { GET_POST_DETAILS } from '../../GraphQL/Queries/post';
 import FeaturedPost from '../../components/Post';
-
-const singlePost = {
-  title: 'Featured post',
-  date: 'Nov 12',
-  description: 'This is a wider card with supporting text below as a natural lead-in to additional content.',
-  image: 'https://source.unsplash.com/random',
-  imageLabel: 'Image Text',
-  views: 5000,
-};
+import { PAGE_VIEW_MUTATION } from '../../GraphQL/Mutations/view';
 
 const theme = createTheme();
 
@@ -29,10 +20,20 @@ export default function BlogDetails(props: any) {
     variables: { postId: id },
   });
 
+  const [newPostView, { error: viewError }] = useMutation(PAGE_VIEW_MUTATION);
   useEffect(() => {
     if (!error && data) {
       setPost(data.GetPost);
     }
+
+    newPostView({
+      variables: {
+        newPostViewDto: {
+          userId: localStorage.getItem('id'),
+          postId: id,
+        },
+      },
+    });
   }, [data, error, loading]);
 
   useEffect(() => {

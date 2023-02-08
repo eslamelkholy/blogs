@@ -3,7 +3,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 import FeaturedPost from '../../components/Post';
 import { useQuery } from '@apollo/client';
 import { RoleProps, Post } from './types';
-import { GET_ADMIN_POSTS } from '../../GraphQL/Timeline.ts';
+import { GET_ADMIN_POSTS } from '../../GraphQL/Queries/Timeline.ts';
 import { defaultPaginationDto } from '../../util/pagination';
 
 export default function AdminPostPage(props: RoleProps) {

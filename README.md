@@ -56,6 +56,7 @@ npm run test:cov
 - Use Sonarqube For Test coverage instead of Jest
 - Front-end State management to handle User State
 - Having a mechanism for search which is Canceling Previous request if user still typing
+- Caching Mechanism for cache post views, posts for the User
 
 ### Pircutres
 
