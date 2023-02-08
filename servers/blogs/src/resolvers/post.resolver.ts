@@ -35,6 +35,11 @@ export class PostResolver {
     return this.postService.getProfilePosts(pageOptionDto, userId);
   }
 
+  @Query(() => Post, { name: 'GetPost' })
+  getPost(@Args('postId') postId: string): Promise<Post> {
+    return this.postService.getPost(postId);
+  }
+
   @Mutation(() => PostViews, { name: 'newPostView' })
   newPostView(
     @Args('newPostViewDto') newPostViewDto: NewPostViewDto,

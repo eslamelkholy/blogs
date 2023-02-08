@@ -22,12 +22,16 @@ export default function Blog() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Container maxWidth='lg'>
+      <Container>
         <Box sx={{ flexGrow: 1 }}>
-          <Grid container md={10} spacing={4}>
+          <Grid container md={12} spacing={4}>
             <Grid xs={2}></Grid>
 
-            {role && <Grid xs={8}>{role === 'admin' ? <AdminPostPage role={role} /> : <UserPostPage role={role} />}</Grid>}
+            {role && (
+              <Grid xs={8} width={'90%'}>
+                {role === 'admin' ? <AdminPostPage role={role} /> : <UserPostPage role={role} />}
+              </Grid>
+            )}
             <Grid xs={2}></Grid>
           </Grid>
         </Box>

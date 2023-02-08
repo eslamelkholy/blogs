@@ -58,6 +58,15 @@ export class PostService {
     await this.postRepository.publishPosts();
   }
 
+  async getPost(postId: string): Promise<Post> {
+    const post = await this.postRepository.getPost(postId);
+    if (!post) {
+      throw new CustomError(ErrorMsg.NOT_FOUND, HttpStatus.NOT_FOUND);
+    }
+
+    return post;
+  }
+
   async newPostView(newPostViewDto: NewPostViewDto): Promise<PostViews> {
     const postView = await this.postViewService.getCurrentPostViews(
       newPostViewDto,

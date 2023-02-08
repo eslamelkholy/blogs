@@ -5,6 +5,10 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 
 import FeaturedPostDetails from '../../components/PostDetails';
+import { Post } from '../Home/types';
+import { useQuery } from '@apollo/client';
+import { GET_POST_DETAILS } from '../../GraphQL/post';
+import FeaturedPost from '../../components/Post';
 
 const singlePost = {
   title: 'Featured post',
@@ -20,10 +24,16 @@ const theme = createTheme();
 export default function BlogDetails(props: any) {
   const [role, setRole] = useState('user');
   const { id } = useParams();
+  const [post, setPost] = useState<Post | null>(null);
+  const { error, loading, data } = useQuery(GET_POST_DETAILS, {
+    variables: { postId: id },
+  });
 
   useEffect(() => {
-    // call api
-  }, []);
+    if (!error && data) {
+      setPost(data.GetPost);
+    }
+  }, [data, error, loading]);
 
   useEffect(() => {
     const userRole = localStorage.getItem('role');
@@ -35,9 +45,7 @@ export default function BlogDetails(props: any) {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Container maxWidth='lg'>
-        <main>
-          <FeaturedPostDetails key={singlePost.title} post={singlePost} role={role} />
-        </main>
+        <main>{post && <FeaturedPost post={post} role={role} />}</main>
       </Container>
     </ThemeProvider>
   );

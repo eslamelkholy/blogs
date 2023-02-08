@@ -7,16 +7,10 @@ import { Avatar, CardHeader } from '@mui/material';
 import { red } from '@mui/material/colors';
 import { Link } from 'react-router-dom';
 import { dateParse } from '../../util/date';
+import { Post } from '../../container/Home/types';
 
 interface FeaturedPostProps {
-  post: {
-    id: number;
-    created_at: string;
-    text: string;
-    title: string;
-    subTitle: string;
-    totalPostViews: number;
-  };
+  post: Post;
   role: string;
 }
 

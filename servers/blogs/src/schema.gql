@@ -63,6 +63,7 @@ type Query {
   userSearch(email: String!, pageOptionDto: PageOptionsDto!): UserResponse!
   GetUserPosts(pageOptionDto: PageOptionsDto!, userId: String!): PostResponse!
   GetProfilePosts(pageOptionDto: PageOptionsDto!, userId: String!): PostResponse!
+  GetPost(postId: String!): Post!
 }
 
 input PageOptionsDto {

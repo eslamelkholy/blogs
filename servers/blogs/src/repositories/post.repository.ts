@@ -76,6 +76,10 @@ export class PostRepository {
       .execute();
   }
 
+  async getPost(postId: string): Promise<Post> {
+    return this.postRepository.findOne({ where: { id: postId } });
+  }
+
   timelineQuery(
     user: User,
     pageOptionDto: PageOptionsDto,
