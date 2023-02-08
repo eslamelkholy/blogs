@@ -40,7 +40,7 @@ export default function AdminPostPage(props: RoleProps) {
         <FeaturedPost key={post.id} post={post} role={role} />
       ))}
       <div style={{ display: 'flex', justifyContent: 'center', margin: '20px' }}>
-        <Pagination count={paginationData?.pageCount || 1} color='primary' onChange={handleChangePage} />
+        <Pagination count={paginationData?.pageCount} color='primary' onChange={handleChangePage} />
       </div>
     </Grid>
   );

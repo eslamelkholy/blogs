@@ -10,14 +10,12 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { GET_USER_EMAIL } from '../../GraphQL/Queries/user';
 import { useQuery } from '@apollo/client';
-import { useNavigate } from 'react-router-dom';
 
 const theme = createTheme();
 
 export default function SignIn() {
   const [email, setEmail] = useState('');
   const { error, loading, data } = useQuery(GET_USER_EMAIL, { variables: { email } });
-  const navigate = useNavigate();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -31,9 +29,9 @@ export default function SignIn() {
       localStorage.setItem('id', data.getUserByEmail.id);
       localStorage.setItem('email', data.getUserByEmail.email);
       localStorage.setItem('role', data.getUserByEmail.role);
-      navigate('/');
+      window.location.replace('/');
     }
-  }, [email, loading, data, error, navigate]);
+  }, [email, loading, data, error]);
 
   return (
     <ThemeProvider theme={theme}>

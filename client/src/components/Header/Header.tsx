@@ -2,7 +2,7 @@ import * as React from 'react';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Link } from 'react-router-dom';
+import { AppBar, Link } from '@mui/material';
 
 interface HeaderProps {
   title: string;
@@ -18,17 +18,26 @@ export default function Header(props: HeaderProps) {
 
   return signInPage() ? (
     <React.Fragment>
-      <Toolbar sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Typography component='h2' variant='h5' color='inherit' align='center' noWrap sx={{ flex: 1 }}>
-          {title}
-        </Typography>
-        {role === 'admin' && (
-          <Button variant='outlined' size='small'>
-            <Link to='/users'>Users</Link>
+      <AppBar position='static' color='default' elevation={0} sx={{ borderBottom: (theme) => `1px solid ${theme.palette.divider}` }}>
+        <Toolbar sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          <Typography component='h2' variant='h5' color='inherit' align='center' noWrap sx={{ flex: 1 }}>
+            {title}
+          </Typography>
+          <Button variant='outlined' size='small' style={{ marginRight: '1%', position: 'absolute' }}>
+            <Link href='/'>Home</Link>
           </Button>
-        )}
-      </Toolbar>
-      <Toolbar component='nav' variant='dense' sx={{ justifyContent: 'space-between', overflowX: 'auto' }}></Toolbar>
+          {role !== undefined && (
+            <Button variant='outlined' size='small' style={{ marginRight: '1%' }}>
+              <Link href='/signin'>Logout</Link>
+            </Button>
+          )}
+          {role === 'admin' && (
+            <Button variant='outlined' size='small'>
+              <Link href='/users'>Users</Link>
+            </Button>
+          )}
+        </Toolbar>
+      </AppBar>
     </React.Fragment>
   ) : (
     <></>
