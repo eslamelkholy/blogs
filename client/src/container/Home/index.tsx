@@ -4,9 +4,9 @@ import Grid from '@mui/material/Unstable_Grid2';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState, useEffect } from 'react';
-import Pagination from '@mui/material/Pagination';
 import AdminPostPage from './admin';
 import UserPostPage from './user';
+import { PostPage } from '../Post';
 
 const theme = createTheme();
 
@@ -26,9 +26,9 @@ export default function Blog() {
         <Box sx={{ flexGrow: 1 }}>
           <Grid container md={12} spacing={4}>
             <Grid xs={2}></Grid>
-
             {role && (
               <Grid xs={8} width={'90%'}>
+                {role === 'admin' && <PostPage />}
                 {role === 'admin' ? <AdminPostPage role={role} /> : <UserPostPage role={role} />}
               </Grid>
             )}

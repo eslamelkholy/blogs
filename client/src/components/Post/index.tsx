@@ -18,7 +18,7 @@ export default function FeaturedPost(props: FeaturedPostProps) {
   const { post, role } = props;
 
   return (
-    <Grid item md={12} margin={2} width={'100%'}>
+    <Grid item md={12} marginTop={2} width={'100%'}>
       <CardActionArea component='a'>
         <Card>
           <CardContent sx={{ flex: 1 }}>

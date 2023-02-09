@@ -1,0 +1,65 @@
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+import { postStyle } from './style';
+import { TextField } from '@mui/material';
+
+export const PostPage = () => {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const email = formData.get('email')?.toString();
+    const subtitle = formData.get('subtitle')?.toString();
+    const text = formData.get('text')?.toString();
+  };
+
+  return (
+    <div>
+      <Button variant='contained' onClick={handleOpen}>
+        Add Post
+      </Button>
+      <Modal open={open} onClose={handleClose} aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
+        <Box sx={postStyle}>
+          <Typography id='modal-modal-title' variant='h6' component='h2'>
+            Text in a modal
+          </Typography>
+          <Box component='form' onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+            <TextField margin='normal' required fullWidth id='email' label='Title' name='email' autoComplete='email' autoFocus />
+            <TextField
+              margin='normal'
+              required
+              fullWidth
+              id='subtitle'
+              label='Sub Title'
+              name='subtitle'
+              autoComplete='subtitle'
+              autoFocus
+            />
+            <TextField
+              margin='normal'
+              required
+              fullWidth
+              id='text'
+              label='Text'
+              name='text'
+              autoComplete='text'
+              autoFocus
+              multiline
+              rows={10}
+            />
+
+            <Button type='submit' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }}>
+              Send Post
+            </Button>
+          </Box>
+        </Box>
+      </Modal>
+    </div>
+  );
+};
