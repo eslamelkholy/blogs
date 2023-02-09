@@ -6,11 +6,11 @@ import { Order } from './constants';
 
 @InputType()
 export class PageOptionsDto {
-  @ApiPropertyOptional({ enum: Order, default: Order.DESC })
+  @ApiPropertyOptional({ enum: Order, default: Order.ASC })
   @IsEnum(Order)
   @IsOptional()
   @Field()
-  readonly order?: Order = Order.DESC;
+  readonly order?: Order = Order.ASC;
 
   @ApiPropertyOptional({
     minimum: 1,

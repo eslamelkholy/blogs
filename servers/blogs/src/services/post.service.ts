@@ -76,8 +76,8 @@ export class PostService {
       return postView;
     }
 
-    await this.postRepository.newPostView(newPostViewDto);
     const newpostView = await this.postViewService.addPostViews(newPostViewDto);
+    await this.postRepository.newPostView(newPostViewDto);
 
     return newpostView;
   }

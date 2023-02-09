@@ -37,6 +37,8 @@ export const PostPage = () => {
         },
       },
     });
+
+    window.location.replace('/');
   };
 
   return (
