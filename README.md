@@ -61,3 +61,8 @@ npm run test:cov
 ### Pircutres
 
 ![MainSearch](https://user-images.githubusercontent.com/55209776/217028321-e91725e3-ae9a-4a8d-a715-1f823d4d7f2d.png)
+![Screenshot_٢٠٢٣٠٢٠٩_٠٤٢٨٢٠](https://user-images.githubusercontent.com/55209776/217702179-c11df647-bcdb-484c-8e40-549aaa5066ff.png)
+![Screenshot_٢٠٢٣٠٢٠٩_٠٤٢٨٣٢](https://user-images.githubusercontent.com/55209776/217702229-37a90866-4c32-4d25-ae84-b6d9400cb979.png)
+
+
+
