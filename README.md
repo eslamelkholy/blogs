@@ -24,13 +24,25 @@ This application to Handle Blogs to Different Types of Users
 export APP_ENV=development
 ```
 
-2. docker-compose up blogs
+2. Up back-end and Database & copy Environment Variables
+```
+cp .env.dist .env
+```
+```
+docker-compose up blogs
+```
+
+3. Up Front-end Side
+```
+npm start
+```
 
 #### Run Unit tests
 
 ```
 npm run test
 ```
+
 
 ![test](https://user-images.githubusercontent.com/55209776/217111954-5b6eee84-8583-4293-81ee-e2c8736ddf17.png)
 
