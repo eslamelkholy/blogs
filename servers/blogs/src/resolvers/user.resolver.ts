@@ -24,7 +24,6 @@ export class UserResolver {
   }
 
   @Query(() => UserResponse, { name: 'userSearch' })
-  @UseGuards(UserGuard)
   userSearch(
     @Args('email', { type: () => String }) email: string,
     @Args('pageOptionDto') pageOptionDto: PageOptionsDto,
