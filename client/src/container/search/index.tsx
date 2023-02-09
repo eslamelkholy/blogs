@@ -6,7 +6,7 @@ import SegmentTypesPage from './segmentType';
 import { defaultPaginationDto } from '../../util/pagination';
 import { SEARCH_USERS } from '../../GraphQL/Queries/search';
 import { useQuery } from '@apollo/client';
-import { UserType } from './types';
+import { SegmentType, UserType } from './types';
 import { InputWrapper, Label, Listbox, Root, StyledTag } from './style';
 
 interface TagProps extends ReturnType<AutocompleteGetTagProps> {
@@ -23,7 +23,14 @@ export function Tag(props: TagProps) {
   );
 }
 
-export default function SearchPage() {
+interface SearchPageProps {
+  setSelectedUsers: any;
+  segmentType: any;
+  setSegmentType: any;
+}
+
+export default function SearchPage(props: SearchPageProps) {
+  const { setSelectedUsers, segmentType, setSegmentType } = props;
   const [userData, setUserData] = useState<UserType[]>([]);
   const {
     getRootProps,
@@ -43,17 +50,19 @@ export default function SearchPage() {
     options: userData,
     getOptionLabel: (option) => option.email,
   });
-  const [segmentType, setSegmentType] = useState('');
   const { error, loading, data, refetch } = useQuery(SEARCH_USERS, {
     variables: { pageOptionDto: { take: defaultPaginationDto.take, page: defaultPaginationDto.page }, email: getInputProps().value },
   });
 
   useEffect(() => {
-    if (!error && data) setUserData(data.userSearch.entities);
+    if (!error && data) {
+      setUserData(data.userSearch.entities);
+    }
   }, [data, error, loading]);
 
-  console.log(value, getInputProps().value);
-
+  useEffect(() => {
+    setSelectedUsers(value);
+  }, [value]);
   return (
     <Root>
       <div {...getRootProps()}>
@@ -63,7 +72,7 @@ export default function SearchPage() {
           {value.map((option: UserType, index: number) => (
             <StyledTag label={option.email} {...getTagProps({ index })} />
           ))}
-          <input {...getInputProps()} />
+          <input {...getInputProps()} disabled={segmentType !== SegmentType.OTHER} />
         </InputWrapper>
       </div>
       {groupedOptions.length > 0 ? (

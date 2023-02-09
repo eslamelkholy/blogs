@@ -12,7 +12,6 @@ export class PostResolver {
   constructor(private postService: PostService) {}
 
   @Mutation(() => Post)
-  @UseGuards(UserGuard)
   createPost(
     @Args('createPostInput') createPostInput: CreatePostDto,
   ): Promise<Post> {

@@ -6,18 +6,37 @@ import Modal from '@mui/material/Modal';
 import { postStyle } from './style';
 import { Grid, TextField } from '@mui/material';
 import SearchPage from '../search/index';
+import { useMutation } from '@apollo/client';
+import { CREATE_POST_MUTATION } from '../../GraphQL/Mutations/post';
 
 export const PostPage = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [selectedUsers, setSelectedUsers] = React.useState<any>([]);
+  const [segmentType, setSegmentType] = React.useState('');
+
+  const [createPost] = useMutation(CREATE_POST_MUTATION);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const title = formData.get('title')?.toString();
-    const subtitle = formData.get('subtitle')?.toString();
+    const subTitle = formData.get('subtitle')?.toString();
     const text = formData.get('text')?.toString();
+
+    createPost({
+      variables: {
+        createPostInput: {
+          userId: localStorage.getItem('id'),
+          title,
+          subTitle,
+          text,
+          segmentType,
+          userIds: selectedUsers.map((user: any) => (user = user?.id)),
+        },
+      },
+    });
   };
 
   return (
@@ -31,7 +50,7 @@ export const PostPage = () => {
             <Typography id='modal-modal-title' variant='h6' component='h2'>
               Segment Type
             </Typography>
-            <SearchPage />
+            <SearchPage setSelectedUsers={setSelectedUsers} segmentType={segmentType} setSegmentType={setSegmentType} />
           </Grid>
           <Grid>
             <Typography id='modal-modal-title' variant='h6' component='h2'>
